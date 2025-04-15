@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
     private static ApiService apiService;
-    private static  final String BASE_URL = "http://192.168.137.51:5050/";
+    private static  final String BASE_URL = "http://stockease.local/";
 
     public static ApiService getApiService(SessionManager sessionManager){
        if(apiService == null) {
