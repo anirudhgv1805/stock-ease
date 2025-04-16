@@ -23,4 +23,10 @@ public class OrderRepository {
     public void getOrders(Callback<List<Order>> callback) {
         apiService.getOrders().enqueue(callback);
     }
+
+    public void createOrder(String item, int quantity, String clientName, Callback<Void> callback) {
+        Order order = new Order(item, quantity, clientName);
+        apiService.postOrder(order).enqueue(callback);
+    }
+
 }
