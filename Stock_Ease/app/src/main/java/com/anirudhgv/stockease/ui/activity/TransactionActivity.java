@@ -1,9 +1,6 @@
 package com.anirudhgv.stockease.ui.activity;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,6 +9,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.anirudhgv.stockease.R;
 import com.anirudhgv.stockease.ui.adapter.TransactionAdapter;
 import com.anirudhgv.stockease.ui.viewmodel.OrderViewModel;
+import com.anirudhgv.stockease.data.model.Order;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TransactionActivity extends AppCompatActivity {
 
@@ -31,14 +32,13 @@ public class TransactionActivity extends AppCompatActivity {
         orderViewModel = new ViewModelProvider(this).get(OrderViewModel.class);
 
         orderViewModel.getOrderList().observe(this, orders -> {
-            // Filter completed orders
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                transactionAdapter.setOrders(
-                        orders.stream()
-                                .filter(order -> "Completed".equalsIgnoreCase(order.getStatus()))
-                                .toList()
-                );
+            List<Order> completedOrders = new ArrayList<>();
+            for (Order order : orders) {
+                if ("Completed".equalsIgnoreCase(order.getStatus())) {
+                    completedOrders.add(order);
+                }
             }
+            transactionAdapter.setOrders(completedOrders);
         });
 
         orderViewModel.fetchOrders();

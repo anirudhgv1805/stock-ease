@@ -1,9 +1,10 @@
 package com.anirudhgv.stockease.data.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Order {
-    private int id;
+public class Order implements Serializable {
+    private Long id;
     private String item;
     private int quantity;
     private String status;
@@ -20,7 +21,7 @@ public class Order {
         this.status = "pending";
     }
 
-    public Order(int id, String item, int quantity, String status, Date processedAt, double price, String clientName) {
+    public Order(Long id, String item, int quantity, String status, Date processedAt, double price, String clientName) {
         this.id = id;
         this.item = item;
         this.quantity = quantity;
@@ -30,7 +31,7 @@ public class Order {
         this.clientName = clientName;
     }
 
-    public int getId() { return id; }
+    public Long getId() { return id; }
     public String getItem() { return item; }
     public int getQuantity() { return quantity; }
     public String getStatus() { return status; }
@@ -38,7 +39,7 @@ public class Order {
     public double getPrice() { return price; }
     public String getClientName() { return clientName; }
 
-    public void setId(int id) { this.id = id; }
+    public void setId(Long id) { this.id = id; }
     public void setItem(String item) { this.item = item; }
     public void setQuantity(int quantity) { this.quantity = quantity; }
     public void setStatus(String status) { this.status = status; }

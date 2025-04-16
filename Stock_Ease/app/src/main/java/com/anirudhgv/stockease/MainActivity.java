@@ -19,6 +19,7 @@ import com.anirudhgv.stockease.ui.activity.LoginActivity;
 import com.anirudhgv.stockease.ui.activity.TransactionActivity;
 import com.anirudhgv.stockease.ui.adapter.OrderAdapter;
 import com.anirudhgv.stockease.ui.viewmodel.OrderViewModel;
+import com.anirudhgv.stockease.ui.activity.EditOrderActivity;
 import com.google.android.material.button.MaterialButton;
 
 import java.io.IOException;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         MaterialButton btnViewOrders = findViewById(R.id.btnViewOrders);
         MaterialButton btnAddOrder = findViewById(R.id.btnAddOrder);
         MaterialButton btnTransactions = findViewById(R.id.btnTransactions);
+        MaterialButton btnEditOrder = findViewById(R.id.btnEditOrder);
         RecyclerView recyclerOrders = findViewById(R.id.recyclerOrders);
 
         // RecyclerView & ViewModel setup
@@ -77,6 +79,11 @@ public class MainActivity extends AppCompatActivity {
 
         btnTransactions.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, TransactionActivity.class);
+            startActivity(intent);
+        });
+
+        btnEditOrder.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, EditOrderActivity.class);
             startActivity(intent);
         });
 

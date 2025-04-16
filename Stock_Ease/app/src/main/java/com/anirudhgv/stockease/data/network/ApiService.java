@@ -11,6 +11,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface ApiService {
 
@@ -26,5 +27,8 @@ public interface ApiService {
 
     @POST("orders/add")
     Call<ResponseBody> postOrder(@Body Order order);
+
+    @POST("orders/update/{id}/")
+    Call<ResponseBody> updateOrder(@Path("id") int id, @Body Order order);
 
 }

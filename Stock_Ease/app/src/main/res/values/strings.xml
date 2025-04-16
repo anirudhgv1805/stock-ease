@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Stock Ease</string>
+    <string-array name="order_status_array">
+        <item>Pending</item>
+        <item>Processing</item>
+        <item>Completed</item>
+    </string-array>
 </resources>
