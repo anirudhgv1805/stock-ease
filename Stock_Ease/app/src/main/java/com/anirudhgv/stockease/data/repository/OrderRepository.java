@@ -10,6 +10,7 @@ import com.anirudhgv.stockease.data.storage.SessionManager;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Callback;
 
 public class OrderRepository {
@@ -24,7 +25,7 @@ public class OrderRepository {
         apiService.getOrders().enqueue(callback);
     }
 
-    public void createOrder(String item, int quantity, String clientName, Callback<Void> callback) {
+    public void createOrder(String item, int quantity, String clientName, Callback<ResponseBody> callback) {
         Order order = new Order(item, quantity, clientName);
         apiService.postOrder(order).enqueue(callback);
     }

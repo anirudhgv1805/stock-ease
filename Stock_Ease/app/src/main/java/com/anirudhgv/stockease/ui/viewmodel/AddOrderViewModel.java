@@ -13,6 +13,7 @@ import com.anirudhgv.stockease.data.repository.AuthRepository;
 import com.anirudhgv.stockease.data.repository.OrderRepository;
 import com.anirudhgv.stockease.data.storage.SessionManager;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,16 +36,17 @@ public class AddOrderViewModel extends AndroidViewModel {
     }
 
     public void submitOrder(String item, int quantity, String clientName) {
-        orderRepository.createOrder(item, quantity, clientName, new Callback<Void>() {
+        orderRepository.createOrder(item, quantity, clientName, new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 orderAdded.postValue(response.isSuccessful());
                 Toast.makeText(getApplication(),"Order Added Successfully",Toast.LENGTH_LONG).show();
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 orderAdded.postValue(false);
+                Toast.makeText(getApplication(),"Failed To add the order",Toast.LENGTH_LONG).show();
             }
         });
     }

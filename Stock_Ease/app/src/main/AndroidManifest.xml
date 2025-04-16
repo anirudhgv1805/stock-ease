@@ -18,6 +18,8 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"/>
+        <activity android:name=".ui.activity.AddOrderActivity" />
+        <activity android:name=".ui.activity.TransactionActivity" />
         <activity android:name=".ui.activity.LoginActivity"
             android:exported="true">
             <intent-filter>

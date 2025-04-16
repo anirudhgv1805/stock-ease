@@ -1,6 +1,15 @@
 package com.anirudhgv.stockease.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Order {
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
     private String item;
     private int quantity;
@@ -43,4 +52,19 @@ public class Order {
     public void setProcessedAt(String processedAt) { this.processedAt = processedAt; }
     public void setPrice(double price) { this.price = price; }
     public void setClientName(String clientName) { this.clientName = clientName; }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", item='" + getItem() + "'" +
+            ", quantity='" + getQuantity() + "'" +
+            ", status='" + getStatus() + "'" +
+            ", processedAt='" + getProcessedAt() + "'" +
+            ", price='" + getPrice() + "'" +
+            ", clientName='" + getClientName() + "'" +
+            "}";
+    }
+
+    
 }
