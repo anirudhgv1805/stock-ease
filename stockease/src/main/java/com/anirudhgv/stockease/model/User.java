@@ -1,83 +1,123 @@
 package com.anirudhgv.stockease.model;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-@Entity(name="Users")
+@Entity
+@Table(name = "users")
 public class User {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long userId;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
-    private String username;
-    private String role;
-    private String password;
+    private String name;
+
+    @Column(unique = true)
+    private String email;
+
+    private String passwordHash;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    private LocalDateTime createdAt = LocalDateTime.now();
 
 
     public User() {
     }
 
-    public User(Long id, String username, String role, String password) {
-        this.id = id;
-        this.username = username;
+    public User(Long userId, String name, String email, String passwordHash, Role role, LocalDateTime createdAt) {
+        this.userId = userId;
+        this.name = name;
+        this.email = email;
+        this.passwordHash = passwordHash;
         this.role = role;
-        this.password = password;
+        this.createdAt = createdAt;
     }
 
-    public Long getId() {
-        return this.id;
+    public Long getUserId() {
+        return this.userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public String getUsername() {
-        return this.username;
+    public String getName() {
+        return this.name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getRole() {
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPasswordHash() {
+        return this.passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public Role getRole() {
         return this.role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
-    public String getPassword() {
-        return this.password;
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public User id(Long id) {
-        setId(id);
+    public User userId(Long userId) {
+        setUserId(userId);
         return this;
     }
 
-    public User username(String username) {
-        setUsername(username);
+    public User name(String name) {
+        setName(name);
         return this;
     }
 
-    public User role(String role) {
+    public User email(String email) {
+        setEmail(email);
+        return this;
+    }
+
+    public User passwordHash(String passwordHash) {
+        setPasswordHash(passwordHash);
+        return this;
+    }
+
+    public User role(Role role) {
         setRole(role);
         return this;
     }
 
-    public User password(String password) {
-        setPassword(password);
+    public User createdAt(LocalDateTime createdAt) {
+        setCreatedAt(createdAt);
         return this;
     }
 
@@ -89,23 +129,24 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(role, user.role) && Objects.equals(password, user.password);
+        return Objects.equals(userId, user.userId) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(passwordHash, user.passwordHash) && Objects.equals(role, user.role) && Objects.equals(createdAt, user.createdAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, role, password);
+        return Objects.hash(userId, name, email, passwordHash, role, createdAt);
     }
 
     @Override
     public String toString() {
         return "{" +
-            " id='" + getId() + "'" +
-            ", username='" + getUsername() + "'" +
+            " userId='" + getUserId() + "'" +
+            ", name='" + getName() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", passwordHash='" + getPasswordHash() + "'" +
             ", role='" + getRole() + "'" +
-            ", password='" + getPassword() + "'" +
+            ", createdAt='" + getCreatedAt() + "'" +
             "}";
     }
-
 
 }
