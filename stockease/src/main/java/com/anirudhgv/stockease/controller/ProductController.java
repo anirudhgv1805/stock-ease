@@ -17,9 +17,6 @@ import com.anirudhgv.stockease.model.Product;
 import com.anirudhgv.stockease.service.ProductService;
 
 
-
-
-
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
