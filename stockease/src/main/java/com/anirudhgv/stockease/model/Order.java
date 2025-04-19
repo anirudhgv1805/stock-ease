@@ -1,14 +1,19 @@
 package com.anirudhgv.stockease.model;
 
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -17,140 +22,113 @@ import jakarta.persistence.Table;
 @Table(name = "orders")
 public class Order {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String status; 
-
-    private LocalDateTime createdAt;
-    private LocalDateTime completedAt;
-
-    private Double totalAmount;
+    private Long orderId;
 
     @ManyToOne
-    private Client client;
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    @ManyToOne
-    private User createdBy;
+    private LocalDateTime orderDate = LocalDateTime.now();
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    private BigDecimal totalAmount;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<OrderItem> orderItems;
+    private List<OrderItem> items;
 
+    public enum Status {
+        PENDING, CONFIRMED, SHIPPED, CANCELLED
+    }
 
     public Order() {
     }
 
-    public Order(Long id, String status, LocalDateTime createdAt, LocalDateTime completedAt, Double totalAmount, Client client, User createdBy, List<OrderItem> orderItems) {
-        this.id = id;
+    public Order(Long orderId, User user, LocalDateTime orderDate, Status status, BigDecimal totalAmount, List<OrderItem> items) {
+        this.orderId = orderId;
+        this.user = user;
+        this.orderDate = orderDate;
         this.status = status;
-        this.createdAt = createdAt;
-        this.completedAt = completedAt;
         this.totalAmount = totalAmount;
-        this.client = client;
-        this.createdBy = createdBy;
-        this.orderItems = orderItems;
+        this.items = items;
     }
 
-    public Long getId() {
-        return this.id;
+    public Long getOrderId() {
+        return this.orderId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 
-    public String getStatus() {
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public LocalDateTime getOrderDate() {
+        return this.orderDate;
+    }
+
+    public void setOrderDate(LocalDateTime orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public Status getStatus() {
         return this.status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return this.createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getCompletedAt() {
-        return this.completedAt;
-    }
-
-    public void setCompletedAt(LocalDateTime completedAt) {
-        this.completedAt = completedAt;
-    }
-
-    public Double getTotalAmount() {
+    public BigDecimal getTotalAmount() {
         return this.totalAmount;
     }
 
-    public void setTotalAmount(Double totalAmount) {
+    public void setTotalAmount(BigDecimal totalAmount) {
         this.totalAmount = totalAmount;
     }
 
-    public Client getClient() {
-        return this.client;
+    public List<OrderItem> getItems() {
+        return this.items;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setItems(List<OrderItem> items) {
+        this.items = items;
     }
 
-    public User getCreatedBy() {
-        return this.createdBy;
-    }
-
-    public void setCreatedBy(User createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public List<OrderItem> getOrderItems() {
-        return this.orderItems;
-    }
-
-    public void setOrderItems(List<OrderItem> orderItems) {
-        this.orderItems = orderItems;
-    }
-
-    public Order id(Long id) {
-        setId(id);
+    public Order orderId(Long orderId) {
+        setOrderId(orderId);
         return this;
     }
 
-    public Order status(String status) {
+    public Order user(User user) {
+        setUser(user);
+        return this;
+    }
+
+    public Order orderDate(LocalDateTime orderDate) {
+        setOrderDate(orderDate);
+        return this;
+    }
+
+    public Order status(Status status) {
         setStatus(status);
         return this;
     }
 
-    public Order createdAt(LocalDateTime createdAt) {
-        setCreatedAt(createdAt);
-        return this;
-    }
-
-    public Order completedAt(LocalDateTime completedAt) {
-        setCompletedAt(completedAt);
-        return this;
-    }
-
-    public Order totalAmount(Double totalAmount) {
+    public Order totalAmount(BigDecimal totalAmount) {
         setTotalAmount(totalAmount);
         return this;
     }
 
-    public Order client(Client client) {
-        setClient(client);
-        return this;
-    }
-
-    public Order createdBy(User createdBy) {
-        setCreatedBy(createdBy);
-        return this;
-    }
-
-    public Order orderItems(List<OrderItem> orderItems) {
-        setOrderItems(orderItems);
+    public Order items(List<OrderItem> items) {
+        setItems(items);
         return this;
     }
 
@@ -162,27 +140,23 @@ public class Order {
             return false;
         }
         Order order = (Order) o;
-        return Objects.equals(id, order.id) && Objects.equals(status, order.status) && Objects.equals(createdAt, order.createdAt) && Objects.equals(completedAt, order.completedAt) && Objects.equals(totalAmount, order.totalAmount) && Objects.equals(client, order.client) && Objects.equals(createdBy, order.createdBy) && Objects.equals(orderItems, order.orderItems);
+        return Objects.equals(orderId, order.orderId) && Objects.equals(user, order.user) && Objects.equals(orderDate, order.orderDate) && Objects.equals(status, order.status) && Objects.equals(totalAmount, order.totalAmount) && Objects.equals(items, order.items);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, status, createdAt, completedAt, totalAmount, client, createdBy, orderItems);
+        return Objects.hash(orderId, user, orderDate, status, totalAmount, items);
     }
 
     @Override
     public String toString() {
         return "{" +
-            " id='" + getId() + "'" +
+            " orderId='" + getOrderId() + "'" +
+            ", user='" + getUser() + "'" +
+            ", orderDate='" + getOrderDate() + "'" +
             ", status='" + getStatus() + "'" +
-            ", createdAt='" + getCreatedAt() + "'" +
-            ", completedAt='" + getCompletedAt() + "'" +
             ", totalAmount='" + getTotalAmount() + "'" +
-            ", client='" + getClient() + "'" +
-            ", createdBy='" + getCreatedBy() + "'" +
-            ", orderItems='" + getOrderItems() + "'" +
+            ", items='" + getItems() + "'" +
             "}";
     }
-    
 }
-
