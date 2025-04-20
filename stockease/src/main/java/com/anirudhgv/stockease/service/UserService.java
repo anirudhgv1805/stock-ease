@@ -30,9 +30,9 @@ public class UserService {
 
     public User updateUser(Long id, User updatedUser) {
         User existing = getUserById(id);
-        existing.setName(updatedUser.getName());
+        existing.setusername(updatedUser.getusername());
         existing.setEmail(updatedUser.getEmail());
-        existing.setPasswordHash(updatedUser.getPasswordHash());
+        existing.setpassword(updatedUser.getpassword());
         existing.setRole(updatedUser.getRole());
         return userRepository.save(existing);
     }

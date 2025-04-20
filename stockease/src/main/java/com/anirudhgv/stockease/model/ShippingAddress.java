@@ -18,7 +18,7 @@ public class ShippingAddress {
     private Long addressId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "id")
     private User user;
 
     private String addressLine1;

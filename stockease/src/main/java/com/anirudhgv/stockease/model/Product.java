@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 @Table(name = "products")
 public class Product {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long productId;
+    private Long id;
 
     private String name;
 
@@ -32,8 +32,8 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long productId, String name, String description, String sku, BigDecimal price, LocalDateTime createdAt) {
-        this.productId = productId;
+    public Product(Long id, String name, String description, String sku, BigDecimal price, LocalDateTime createdAt) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.sku = sku;
@@ -41,12 +41,12 @@ public class Product {
         this.createdAt = createdAt;
     }
 
-    public Long getProductId() {
-        return this.productId;
+    public Long getid() {
+        return this.id;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setid(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -89,8 +89,8 @@ public class Product {
         this.createdAt = createdAt;
     }
 
-    public Product productId(Long productId) {
-        setProductId(productId);
+    public Product id(Long id) {
+        setid(id);
         return this;
     }
 
@@ -127,18 +127,18 @@ public class Product {
             return false;
         }
         Product product = (Product) o;
-        return Objects.equals(productId, product.productId) && Objects.equals(name, product.name) && Objects.equals(description, product.description) && Objects.equals(sku, product.sku) && Objects.equals(price, product.price) && Objects.equals(createdAt, product.createdAt);
+        return Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(description, product.description) && Objects.equals(sku, product.sku) && Objects.equals(price, product.price) && Objects.equals(createdAt, product.createdAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productId, name, description, sku, price, createdAt);
+        return Objects.hash(id, name, description, sku, price, createdAt);
     }
 
     @Override
     public String toString() {
         return "{" +
-            " productId='" + getProductId() + "'" +
+            " id='" + getid() + "'" +
             ", name='" + getName() + "'" +
             ", description='" + getDescription() + "'" +
             ", sku='" + getSku() + "'" +

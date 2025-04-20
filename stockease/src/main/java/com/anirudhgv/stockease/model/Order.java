@@ -25,7 +25,7 @@ public class Order {
     private Long orderId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "id")
     private User user;
 
     private LocalDateTime orderDate = LocalDateTime.now();

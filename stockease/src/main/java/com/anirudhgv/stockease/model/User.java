@@ -16,14 +16,14 @@ import jakarta.persistence.Table;
 @Table(name = "users")
 public class User {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long id;
 
-    private String name;
+    private String username;
 
     @Column(unique = true)
     private String email;
 
-    private String passwordHash;
+    private String password;
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -34,29 +34,29 @@ public class User {
     public User() {
     }
 
-    public User(Long userId, String name, String email, String passwordHash, Role role, LocalDateTime createdAt) {
-        this.userId = userId;
-        this.name = name;
+    public User(Long id, String username, String email, String password, Role role, LocalDateTime createdAt) {
+        this.id = id;
+        this.username = username;
         this.email = email;
-        this.passwordHash = passwordHash;
+        this.password = password;
         this.role = role;
         this.createdAt = createdAt;
     }
 
-    public Long getUserId() {
-        return this.userId;
+    public Long getid() {
+        return this.id;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setid(Long id) {
+        this.id = id;
     }
 
-    public String getName() {
-        return this.name;
+    public String getusername() {
+        return this.username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setusername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -67,12 +67,12 @@ public class User {
         this.email = email;
     }
 
-    public String getPasswordHash() {
-        return this.passwordHash;
+    public String getpassword() {
+        return this.password;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setpassword(String password) {
+        this.password = password;
     }
 
     public Role getRole() {
@@ -91,13 +91,13 @@ public class User {
         this.createdAt = createdAt;
     }
 
-    public User userId(Long userId) {
-        setUserId(userId);
+    public User id(Long id) {
+        setid(id);
         return this;
     }
 
-    public User name(String name) {
-        setName(name);
+    public User username(String username) {
+        setusername(username);
         return this;
     }
 
@@ -106,8 +106,8 @@ public class User {
         return this;
     }
 
-    public User passwordHash(String passwordHash) {
-        setPasswordHash(passwordHash);
+    public User password(String password) {
+        setpassword(password);
         return this;
     }
 
@@ -129,21 +129,21 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return Objects.equals(userId, user.userId) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(passwordHash, user.passwordHash) && Objects.equals(role, user.role) && Objects.equals(createdAt, user.createdAt);
+        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(role, user.role) && Objects.equals(createdAt, user.createdAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, name, email, passwordHash, role, createdAt);
+        return Objects.hash(id, username, email, password, role, createdAt);
     }
 
     @Override
     public String toString() {
         return "{" +
-            " userId='" + getUserId() + "'" +
-            ", name='" + getName() + "'" +
+            " id='" + getid() + "'" +
+            ", username='" + getusername() + "'" +
             ", email='" + getEmail() + "'" +
-            ", passwordHash='" + getPasswordHash() + "'" +
+            ", password='" + getpassword() + "'" +
             ", role='" + getRole() + "'" +
             ", createdAt='" + getCreatedAt() + "'" +
             "}";
