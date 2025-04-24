@@ -12,7 +12,7 @@ retrofit = "2.9.0"
 okhttp = "4.12.0"
 multidex = "2.0.1"
 recyclerview = "1.4.0"
-jmdns = "3.5.5"
+jmdns = "3.5.7"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }

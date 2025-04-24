@@ -1,8 +1,7 @@
 package com.anirudhgv.stockease.data.network;
 
-import com.anirudhgv.stockease.data.model.LoginRequest;
-import com.anirudhgv.stockease.data.model.LoginResponse;
-import com.anirudhgv.stockease.data.model.Order;
+import com.anirudhgv.stockease.data.model.AuthResponse;
+import com.anirudhgv.stockease.data.model.dto.UserDto;
 
 import java.util.List;
 
@@ -14,21 +13,17 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface ApiService {
-
-    // ApiService.java
     @GET("test")
     Call<ResponseBody> testApi();
 
-    @GET("orders")
-    Call<List<Order>> getOrders();
+    @GET
+    Call<Number> getNoOrders();
 
-    @POST("login/")
-    Call<LoginResponse> login(@Body LoginRequest loginRequest);
+    @POST("auth/register")
+    Call<AuthResponse> register(@Body UserDto user);
 
-    @POST("orders/add")
-    Call<ResponseBody> postOrder(@Body Order order);
+    @POST("auth/login")
+    Call<AuthResponse> login(@Body UserDto user);
 
-    @POST("orders/update/{id}/")
-    Call<ResponseBody> updateOrder(@Path("id") int id, @Body Order order);
 
 }

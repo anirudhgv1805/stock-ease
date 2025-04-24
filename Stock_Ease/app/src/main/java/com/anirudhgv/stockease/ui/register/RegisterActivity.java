@@ -1,8 +1,7 @@
-package com.anirudhgv.stockease.ui.login;
+package com.anirudhgv.stockease.ui.register;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,59 +13,53 @@ import com.anirudhgv.stockease.data.storage.SessionManager;
 import com.anirudhgv.stockease.ui.client.ClientDashboardActivity;
 import com.anirudhgv.stockease.ui.employee.EmployeeDashboardActivity;
 import com.anirudhgv.stockease.ui.owner.OwnerDashboardActivity;
-import com.anirudhgv.stockease.ui.register.RegisterActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Objects;
 
-public class LoginActivity extends AppCompatActivity {
-    private LoginViewModel viewModel;
+public class RegisterActivity extends AppCompatActivity {
+
+    private RegisterViewModel viewModel;
     private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
 
+        viewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
         sessionManager = new SessionManager(this);
-        viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
+        TextInputEditText nameEditText = findViewById(R.id.nameEditText);
         TextInputEditText emailEditText = findViewById(R.id.emailEditText);
         TextInputEditText passwordEditText = findViewById(R.id.passwordEditText);
-        MaterialButton loginButton = findViewById(R.id.loginButton);
-        TextView registerLink = findViewById(R.id.registerLink);
+        MaterialButton registerButton = findViewById(R.id.registerButton);
 
-        loginButton.setOnClickListener(v -> {
+        registerButton.setOnClickListener(v -> {
+            String name = Objects.requireNonNull(nameEditText.getText()).toString().trim();
             String email = Objects.requireNonNull(emailEditText.getText()).toString().trim();
             String password = Objects.requireNonNull(passwordEditText.getText()).toString().trim();
 
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Please enter email and password", Toast.LENGTH_SHORT).show();
+            if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            viewModel.login(new UserDto(email, password), sessionManager);
+            UserDto userDto = new UserDto(name, email, password);
+            System.out.println(userDto);
+            viewModel.register(userDto, sessionManager);
         });
 
-        viewModel.getLoginSuccess().observe(this, success -> {
+        viewModel.getRegisterSuccess().observe(this, success -> {
             if (success) {
-                String role = sessionManager.fetchUserRole();
-                if (role == null) {
-                    Toast.makeText(this, "Login successful but role missing", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                Toast.makeText(this, "Login successful as " + role, Toast.LENGTH_SHORT).show();
-                navigateBasedOnRole(role);
+                Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
+                navigateBasedOnRole(sessionManager.fetchUserRole());
             }
         });
 
-        viewModel.getErrorMessage().observe(this, msg ->
-                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show());
-
-        registerLink.setOnClickListener(v ->
-                startActivity(new Intent(this, RegisterActivity.class)));
+        viewModel.getErrorMessage().observe(this, message ->
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show());
     }
 
     private void navigateBasedOnRole(String role) {
@@ -82,11 +75,10 @@ public class LoginActivity extends AppCompatActivity {
                 intent = new Intent(this, OwnerDashboardActivity.class);
                 break;
             default:
-                Toast.makeText(this, "Unknown role: " + role, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Unknown role", Toast.LENGTH_LONG).show();
                 return;
         }
-
         startActivity(intent);
-        finish(); // Prevents back navigation to login
+        finish();
     }
 }

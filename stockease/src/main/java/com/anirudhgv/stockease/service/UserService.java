@@ -32,7 +32,7 @@ public class UserService {
         User existing = getUserById(id);
         existing.setusername(updatedUser.getusername());
         existing.setEmail(updatedUser.getEmail());
-        existing.setpassword(updatedUser.getpassword());
+        existing.setPassword(updatedUser.getPassword());
         existing.setRole(updatedUser.getRole());
         return userRepository.save(existing);
     }

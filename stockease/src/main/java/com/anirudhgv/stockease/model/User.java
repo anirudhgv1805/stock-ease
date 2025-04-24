@@ -17,7 +17,8 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "users")
 public class User {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String username;
@@ -25,14 +26,12 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    @JsonIgnore
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private Role role = Role.CLIENT;
 
     private LocalDateTime createdAt = LocalDateTime.now();
-
 
     public User() {
     }
@@ -70,11 +69,11 @@ public class User {
         this.email = email;
     }
 
-    public String getpassword() {
+    public String getPassword() {
         return this.password;
     }
 
-    public void setpassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -110,7 +109,7 @@ public class User {
     }
 
     public User password(String password) {
-        setpassword(password);
+        setPassword(password);
         return this;
     }
 
@@ -132,7 +131,9 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(role, user.role) && Objects.equals(createdAt, user.createdAt);
+        return Objects.equals(id, user.id) && Objects.equals(username, user.username)
+                && Objects.equals(email, user.email) && Objects.equals(password, user.password)
+                && Objects.equals(role, user.role) && Objects.equals(createdAt, user.createdAt);
     }
 
     @Override
@@ -143,13 +144,13 @@ public class User {
     @Override
     public String toString() {
         return "{" +
-            " id='" + getid() + "'" +
-            ", username='" + getusername() + "'" +
-            ", email='" + getEmail() + "'" +
-            ", password='" + getpassword() + "'" +
-            ", role='" + getRole() + "'" +
-            ", createdAt='" + getCreatedAt() + "'" +
-            "}";
+                " id='" + getid() + "'" +
+                ", username='" + getusername() + "'" +
+                ", email='" + getEmail() + "'" +
+                ", password='" + getPassword() + "'" +
+                ", role='" + getRole() + "'" +
+                ", createdAt='" + getCreatedAt() + "'" +
+                "}";
     }
 
 }

@@ -10,39 +10,51 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email">
+        android:hint="Name">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/emailEditText"
-            android:inputType="textEmailAddress"
+            android:id="@+id/nameEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="16dp"
+        android:hint="Email">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Password">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordEditText"
-            android:inputType="textPassword"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/loginButton"
+        android:id="@+id/registerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="Register"
         android:layout_marginTop="24dp"
-        style="@style/Widget.Material3.Button"/>
+        style="@style/Widget.Material3.Button.IconButton.Filled"/>
 
     <TextView
-        android:id="@+id/registerLink"
+        android:id="@+id/loginLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Don't have an account? Register"
+        android:text="Already have an account? Login"
         android:textColor="?attr/colorPrimary"
         android:layout_marginTop="16dp"/>
 </LinearLayout>
