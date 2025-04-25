@@ -1,6 +1,7 @@
 package com.anirudhgv.stockease.data.network;
 
 import com.anirudhgv.stockease.data.model.AuthResponse;
+import com.anirudhgv.stockease.data.model.dto.OwnerDashboardData;
 import com.anirudhgv.stockease.data.model.dto.UserDto;
 
 import java.util.List;
@@ -16,14 +17,16 @@ public interface ApiService {
     @GET("test")
     Call<ResponseBody> testApi();
 
-    @GET
-    Call<Number> getNoOrders();
-
     @POST("auth/register")
     Call<AuthResponse> register(@Body UserDto user);
 
     @POST("auth/login")
     Call<AuthResponse> login(@Body UserDto user);
+
+//    for owner dashboard
+    @GET("owner/dashboarddata")
+    Call<OwnerDashboardData> fetchDashboardData();
+
 
 
 }

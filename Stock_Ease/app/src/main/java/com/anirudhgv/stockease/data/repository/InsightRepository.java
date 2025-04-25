@@ -22,8 +22,8 @@ public class InsightRepository {
         this.apiService = ApiClient.getApiService(sessionManager);
     }
 
-    public void getNoOrders(Callback<Number> callback) {
-        apiService.getNoOrders().enqueue(callback);
-    }
+//    public void getNoOrders(Callback<Number> callback) {
+//        apiService.getNoOrders().enqueue(callback);
+//    }
 
 }

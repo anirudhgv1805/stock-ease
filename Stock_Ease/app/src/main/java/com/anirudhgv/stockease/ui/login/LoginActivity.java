@@ -87,6 +87,5 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         startActivity(intent);
-        finish(); // Prevents back navigation to login
     }
 }
