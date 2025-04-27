@@ -26,7 +26,11 @@ public class ClientDashboardActivity extends AppCompatActivity {
         logout.setOnClickListener(v -> {
             sessionManager.clearSession();
             Toast.makeText(this,"User LoggedOut Successfully",Toast.LENGTH_LONG).show();
-            startActivity(new Intent(this, LoginActivity.class));
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+
         });
 
 

@@ -46,7 +46,11 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
-            viewModel.login(new UserDto(email, password), sessionManager);
+            try {
+                viewModel.login(new UserDto(email, password), sessionManager);
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(),"Login Failed"+viewModel.getErrorMessage(),Toast.LENGTH_LONG).show();
+            }
         });
 
         viewModel.getLoginSuccess().observe(this, success -> {
@@ -62,6 +66,15 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+        viewModel.getIsLoading().observe(this, isLoading -> {
+            if (isLoading != null) {
+                loginButton.setEnabled(!isLoading);
+                loginButton.setAlpha(isLoading ? 0.5f : 1f); // Optional: dim button
+            }
+        });
+
+        
         viewModel.getErrorMessage().observe(this, msg ->
                 Toast.makeText(this, msg, Toast.LENGTH_SHORT).show());
 

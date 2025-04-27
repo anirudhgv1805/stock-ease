@@ -30,7 +30,7 @@ public class AuthService {
             return new AuthResponse("fail", "Email already registered", null, null);
         }
 
-        System.out.println("At auth service"+userDto.getPassword());
+        System.out.println("At auth service"+userDto);
         User user = new User();
         user.setEmail(userDto.getEmail());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
@@ -48,6 +48,7 @@ public class AuthService {
     public AuthResponse login(User userDto) {
         Optional<User> userOptional = userRepository.findByEmail(userDto.getEmail());
 
+        System.out.println("at login"+userDto);
         if (userOptional.isEmpty()) {
             return new AuthResponse("fail", "Invalid credentials", null, null);
         }

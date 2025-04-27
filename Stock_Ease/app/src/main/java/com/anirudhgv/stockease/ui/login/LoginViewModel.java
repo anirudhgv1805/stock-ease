@@ -21,6 +21,12 @@ public class LoginViewModel extends ViewModel {
     private final MutableLiveData<Boolean> loginSuccess = new MutableLiveData<>();
     private final MutableLiveData<String> errorMessage = new MutableLiveData<>();
 
+    private final MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
+
+    public LiveData<Boolean> getIsLoading() {
+        return isLoading;
+    }
+
     public LiveData<Boolean> getLoginSuccess() {
         return loginSuccess;
     }
@@ -34,11 +40,17 @@ public class LoginViewModel extends ViewModel {
         api.login(user).enqueue(new Callback<AuthResponse>() {
             @Override
             public void onResponse(@NonNull Call<AuthResponse> call, @NonNull Response<AuthResponse> response) {
+                isLoading.setValue(false);
                 if (response.isSuccessful() && response.body() != null) {
                     AuthResponse auth = response.body();
-                    sessionManager.saveAuthToken(auth.getAccessToken());
-                    sessionManager.saveUserRole(auth.getRole().toString());
-                    loginSuccess.setValue(true);
+                    if("success".equalsIgnoreCase(auth.getStatus())){
+                        sessionManager.saveAuthToken(auth.getAccessToken());
+                        sessionManager.saveUserRole(auth.getRole().toString());
+                        loginSuccess.setValue(true);
+                    }
+                    else{
+                        errorMessage.setValue("Invalid Credentials");
+                    }
                 } else {
                     errorMessage.setValue("Login failed");
                 }
@@ -46,7 +58,8 @@ public class LoginViewModel extends ViewModel {
 
             @Override
             public void onFailure(@NonNull Call<AuthResponse> call, @NonNull Throwable t) {
-                errorMessage.setValue(t.getMessage());
+                isLoading.setValue(false);
+                errorMessage.setValue("Network Error: "+t.getMessage());
             }
         });
     }
