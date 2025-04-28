@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_inventory"
+        android:title="Inventory Overview" />
+
+    <item
+        android:id="@+id/nav_orders"
+        android:title="Manage Orders" />
+
+    <item
+        android:id="@+id/nav_products"
+        android:title="Create Product" />
+
+    <item
+        android:id="@+id/nav_reports"
+        android:title="View Reports" />
+
+    <item
+        android:id="@+id/nav_users"
+        android:title="Manage Users" />
+
+</menu>
