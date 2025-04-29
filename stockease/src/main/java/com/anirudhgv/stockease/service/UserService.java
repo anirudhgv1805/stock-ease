@@ -40,4 +40,18 @@ public class UserService {
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
+
+    public void blockUser(Long userId) {
+        userRepository.findById(userId).ifPresent(user -> {
+            user.setIsBlocked(true);
+            userRepository.save(user);
+        });
+    }
+
+    public void unblockUser(Long userId) {
+        userRepository.findById(userId).ifPresent(user -> {
+            user.setIsBlocked(false);
+            userRepository.save(user);
+        });
+    }
 }

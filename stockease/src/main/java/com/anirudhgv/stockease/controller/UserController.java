@@ -49,4 +49,14 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/owner/{userId}/block")
+    public void blockUser(@PathVariable Long userId) {
+        userService.blockUser(userId);
+    }
+
+    @PostMapping("/owner/{userId}/unblock")
+    public void unblockUser(@PathVariable Long userId) {
+        userService.unblockUser(userId);
+    }
 }

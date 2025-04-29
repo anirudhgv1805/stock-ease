@@ -26,12 +26,24 @@ public class User {
     @Column(unique = true)
     private String email;
 
+    @JsonIgnore
     private String password;
 
     @Enumerated(EnumType.STRING)
     private Role role = Role.CLIENT;
 
+    @JsonIgnore
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    private Boolean isBlocked = false;
+
+    public Boolean getIsBlocked() {
+        return this.isBlocked;
+    }
+
+    public void setIsBlocked(Boolean isBlocked) {
+        this.isBlocked = isBlocked;
+    }
 
     public User() {
     }
