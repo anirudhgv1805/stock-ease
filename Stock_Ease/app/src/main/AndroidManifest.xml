@@ -29,6 +29,11 @@
         <activity android:name=".ui.owner.OwnerDashboardActivity"/>
         <activity android:name=".ui.login.LoginActivity"/>
         <activity android:name=".ui.register.RegisterActivity"/>
+        <activity android:name=".ui.owner.CreateProductActivity"/>
+        <activity android:name=".ui.owner.InventoryOverviewActivity"/>
+        <activity android:name=".ui.owner.ManageOrdersActivity"/>
+        <activity android:name=".ui.owner.ManageUsersActivity"/>
+        <activity android:name=".ui.owner.ViewReportsActivity"/>
 
     </application>
 
