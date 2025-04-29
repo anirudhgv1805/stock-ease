@@ -1,13 +1,18 @@
 package com.anirudhgv.stockease.ui.owner;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.anirudhgv.stockease.R;
 import com.anirudhgv.stockease.data.storage.SessionManager;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 
 public class OwnerDashboardActivity extends AppCompatActivity {
@@ -17,8 +22,27 @@ public class OwnerDashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_owner_dashboard);
 
         SessionManager sessionManager = new SessionManager(getApplicationContext());
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        MaterialToolbar topAppBar = findViewById(R.id.topAppBar);
+        setSupportActionBar(topAppBar);
 
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this,
+                drawerLayout,
+                topAppBar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close
+        );
+
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
 
         Toast.makeText(this, "At OwnerDashboard", Toast.LENGTH_LONG).show();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.owner_nav_menu, menu);
+        return true;
     }
 }
