@@ -1,6 +1,7 @@
 package com.anirudhgv.stockease.data.network;
 
 import com.anirudhgv.stockease.data.model.AuthResponse;
+import com.anirudhgv.stockease.data.model.Product;
 import com.anirudhgv.stockease.data.model.dto.OwnerDashboardData;
 import com.anirudhgv.stockease.data.model.dto.UserDto;
 
@@ -26,6 +27,9 @@ public interface ApiService {
 //    for owner dashboard
     @GET("owner/dashboardData")
     Call<OwnerDashboardData> getOwnerDashboardData();
+
+    @POST("products")
+    Call<Void> createProduct(@Body Product product);
 
 
 

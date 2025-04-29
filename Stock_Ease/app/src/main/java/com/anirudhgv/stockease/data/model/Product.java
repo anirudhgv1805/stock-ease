@@ -22,6 +22,13 @@ public class Product {
         this.createdAt = createdAt;
     }
 
+    public Product(String name, String desc, String sku, BigDecimal price) {
+        this.name = name;
+        this.description = desc;
+        this.sku = sku;
+        this.price = price;
+    }
+
     public Long getId() {
         return id;
     }

@@ -24,7 +24,7 @@ public class OwnerDashboardController {
 
     @GetMapping("/dashboardData")
     public ResponseEntity<OwnerDashboardData> getDashboardData() {
-        return ResponseEntity.ok().body(new OwnerDashboardData(500,300,350));
+        return ResponseEntity.ok().body(new OwnerDashboardData(450,300,350));
     }
     
 
