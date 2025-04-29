@@ -12,11 +12,15 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.anirudhgv.stockease.R;
 import com.anirudhgv.stockease.data.storage.SessionManager;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
+
+import org.w3c.dom.Text;
 
 public class OwnerDashboardActivity extends AppCompatActivity {
     @Override
@@ -33,7 +37,25 @@ public class OwnerDashboardActivity extends AppCompatActivity {
         TextView createProductBtn = findViewById(R.id.createProductBtn);
         TextView manageOrdersBtn = findViewById(R.id.manageOrdersBtn);
 
+        TextView pendingCount = findViewById(R.id.pendingCount);
+        TextView processingCount = findViewById(R.id.processingCount);
+        TextView completedCount = findViewById(R.id.completedCount);
 
+        OwnerViewModel ownerViewModel = new ViewModelProvider(this).get(OwnerViewModel.class);
+        ownerViewModel.loadOwnerDashboardData();
+
+        ownerViewModel.getOwnerDashboardData().observe(this, data -> {
+            if (data != null) {
+                pendingCount.setText(String.valueOf(data.getPendingOrders()));
+                processingCount.setText(String.valueOf(data.getProcessingOrders()));
+                completedCount.setText(String.valueOf(data.getCompletedOrders()));
+            } else {
+                // Optionally show error message or placeholder
+                pendingCount.setText("—");
+                processingCount.setText("—");
+                completedCount.setText("—");
+            }
+        });
 
         setSupportActionBar(topAppBar);
 

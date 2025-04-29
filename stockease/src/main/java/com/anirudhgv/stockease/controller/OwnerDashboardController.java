@@ -22,9 +22,9 @@ public class OwnerDashboardController {
         return ResponseEntity.ok().body(300);
     }
 
-    @GetMapping("/dashboarddata")
+    @GetMapping("/dashboardData")
     public ResponseEntity<OwnerDashboardData> getDashboardData() {
-        return ResponseEntity.ok().body(new OwnerDashboardData(250,300));
+        return ResponseEntity.ok().body(new OwnerDashboardData(500,300,350));
     }
     
 

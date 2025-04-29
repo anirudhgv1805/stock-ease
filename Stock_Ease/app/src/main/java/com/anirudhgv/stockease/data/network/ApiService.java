@@ -24,8 +24,8 @@ public interface ApiService {
     Call<AuthResponse> login(@Body UserDto user);
 
 //    for owner dashboard
-    @GET("owner/dashboarddata")
-    Call<OwnerDashboardData> fetchDashboardData();
+    @GET("owner/dashboardData")
+    Call<OwnerDashboardData> getOwnerDashboardData();
 
 
 

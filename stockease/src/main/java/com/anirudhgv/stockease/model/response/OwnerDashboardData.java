@@ -1,67 +1,50 @@
 package com.anirudhgv.stockease.model.response;
-import java.util.Objects;
 
 public class OwnerDashboardData {
 
-    private int salesCount;
-    private int orderCount;
+    private int pendingOrders;
+    private int processingOrders;
+    private int completedOrders;
 
     public OwnerDashboardData() {
     }
 
-    public OwnerDashboardData(int salesCount, int orderCount) {
-        this.salesCount = salesCount;
-        this.orderCount = orderCount;
+    public OwnerDashboardData(int pendingOrders, int processingOrders, int completedOrders) {
+        this.pendingOrders = pendingOrders;
+        this.processingOrders = processingOrders;
+        this.completedOrders = completedOrders;
     }
 
-    public int getSalesCount() {
-        return this.salesCount;
+    public int getPendingOrders() {
+        return pendingOrders;
     }
 
-    public void setSalesCount(int salesCount) {
-        this.salesCount = salesCount;
+    public void setPendingOrders(int pendingOrders) {
+        this.pendingOrders = pendingOrders;
     }
 
-    public int getOrderCount() {
-        return this.orderCount;
+    public int getProcessingOrders() {
+        return processingOrders;
     }
 
-    public void setOrderCount(int orderCount) {
-        this.orderCount = orderCount;
+    public void setProcessingOrders(int processingOrders) {
+        this.processingOrders = processingOrders;
     }
 
-    public OwnerDashboardData salesCount(int salesCount) {
-        setSalesCount(salesCount);
-        return this;
+    public int getCompletedOrders() {
+        return completedOrders;
     }
 
-    public OwnerDashboardData orderCount(int orderCount) {
-        setOrderCount(orderCount);
-        return this;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof OwnerDashboardData)) {
-            return false;
-        }
-        OwnerDashboardData ownerDashboardData = (OwnerDashboardData) o;
-        return Objects.equals(salesCount, ownerDashboardData.salesCount) && Objects.equals(orderCount, ownerDashboardData.orderCount);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(salesCount, orderCount);
+    public void setCompletedOrders(int completedOrders) {
+        this.completedOrders = completedOrders;
     }
 
     @Override
     public String toString() {
-        return "{" +
-            " salesCount='" + getSalesCount() + "'" +
-            ", orderCount='" + getOrderCount() + "'" +
-            "}";
+        return "OwnerDashboardData{" +
+                "pendingOrders=" + pendingOrders +
+                ", processingOrders=" + processingOrders +
+                ", completedOrders=" + completedOrders +
+                '}';
     }
-
 }
