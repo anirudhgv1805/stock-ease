@@ -34,6 +34,7 @@
         <activity android:name=".ui.owner.ManageOrdersActivity"/>
         <activity android:name=".ui.owner.ManageUsersActivity"/>
         <activity android:name=".ui.owner.ViewReportsActivity"/>
+        <activity android:name=".ui.owner.ProductEditActivity" />
 
     </application>
 

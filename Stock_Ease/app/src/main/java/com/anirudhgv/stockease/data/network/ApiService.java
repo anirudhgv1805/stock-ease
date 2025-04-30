@@ -14,6 +14,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ApiService {
@@ -31,7 +32,7 @@ public interface ApiService {
     Call<OwnerDashboardData> getOwnerDashboardData();
 
     @POST("products")
-    Call<Void> createProduct(@Body Product product);
+    Call<Product> createProduct(@Body Product product);
 
     @GET("users")
     Call<List<User>> getAllUsers();
@@ -44,4 +45,10 @@ public interface ApiService {
 
     @GET("inventory")
     Call<List<Inventory>> getInventory();
+
+    @PUT("products/{id}")
+    Call<Product> updateProduct(@Path("id") long id, @Body Product product);
+
+    @GET("products")
+    Call<List<Product>> getAllProducts();
 }

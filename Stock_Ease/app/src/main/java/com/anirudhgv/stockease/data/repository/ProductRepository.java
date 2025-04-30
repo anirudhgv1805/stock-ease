@@ -27,14 +27,14 @@ public class ProductRepository {
     public LiveData<Boolean> createProduct(Product product) {
         MutableLiveData<Boolean> result = new MutableLiveData<>();
 
-        apiService.createProduct(product).enqueue(new Callback<Void>() {
+        apiService.createProduct(product).enqueue(new Callback<Product>() {
             @Override
-            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+            public void onResponse(@NonNull Call<Product> call, @NonNull Response<Product> response) {
                 result.setValue(response.isSuccessful());
             }
 
             @Override
-            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<Product> call, @NonNull Throwable t) {
                 result.setValue(false);
             }
         });

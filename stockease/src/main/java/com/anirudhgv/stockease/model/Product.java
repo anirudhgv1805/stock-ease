@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,6 +16,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "products")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Product {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="product_id")
@@ -27,6 +31,7 @@ public class Product {
 
     private BigDecimal price;
 
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createdAt = LocalDateTime.now();
 
 

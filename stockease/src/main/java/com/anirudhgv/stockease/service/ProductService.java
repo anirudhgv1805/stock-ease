@@ -1,5 +1,6 @@
 package com.anirudhgv.stockease.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.anirudhgv.stockease.errorHandler.ResourceNotFoundException;
 import com.anirudhgv.stockease.model.Product;
+import com.anirudhgv.stockease.model.dto.ProductUpdateRequest;
 import com.anirudhgv.stockease.repository.ProductRepository;
+
+import aj.org.objectweb.asm.commons.LocalVariablesSorter;
 
 @Service
 public class ProductService {
@@ -28,12 +32,12 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public Product updateProduct(Long id, Product updatedProduct) {
+    public Product updateProduct(Long id, ProductUpdateRequest request) {
         Product existing = getProductById(id);
-        existing.setName(updatedProduct.getName());
-        existing.setDescription(updatedProduct.getDescription());
-        existing.setSku(updatedProduct.getSku());
-        existing.setPrice(updatedProduct.getPrice());
+        existing.setName(request.getName());
+        existing.setDescription(request.getDescription());
+        existing.setSku(request.getSku());
+        existing.setPrice(request.getPrice());
         return productRepository.save(existing);
     }
 

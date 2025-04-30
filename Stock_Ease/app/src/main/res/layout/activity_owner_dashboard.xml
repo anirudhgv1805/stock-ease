@@ -251,6 +251,23 @@
                             android:padding="24dp" />
                     </com.google.android.material.card.MaterialCardView>
 
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        app:cardCornerRadius="12dp"
+                        android:elevation="4dp">
+
+                        <TextView
+                            android:id="@+id/manageProductsBtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Manage Products"
+                            android:textAlignment="center"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:padding="24dp" />
+                    </com.google.android.material.card.MaterialCardView>
                 </GridLayout>
 
             </LinearLayout>

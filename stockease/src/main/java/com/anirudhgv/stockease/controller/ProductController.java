@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.anirudhgv.stockease.model.Product;
+import com.anirudhgv.stockease.model.dto.ProductUpdateRequest;
 import com.anirudhgv.stockease.service.ProductService;
 
 
@@ -40,7 +41,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public Product update(@PathVariable Long id, @RequestBody Product product) {
+    public Product update(@PathVariable Long id, @RequestBody ProductUpdateRequest product) {
         return productService.updateProduct(id, product);
     }
     
