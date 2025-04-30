@@ -6,6 +6,13 @@ import com.anirudhgv.stockease.data.storage.SessionManager;
 import com.anirudhgv.stockease.util.AuthInterceptor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+
+import java.lang.reflect.Type;
+import java.time.LocalDateTime;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -26,10 +33,20 @@ public class ApiClient {
                    .addInterceptor(loggingInterceptor)
                    .build();
 
+           Gson gson = new GsonBuilder()
+                   .registerTypeAdapter(LocalDateTime.class, new JsonDeserializer<LocalDateTime>() {
+                       @Override
+                       public LocalDateTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+                           return LocalDateTime.parse(json.getAsString());
+                       }
+                   })
+                   .create();
+
+
            Retrofit retrofit = new Retrofit.Builder()
                    .baseUrl(BASE_URL)
                    .client(client)
-                   .addConverterFactory(GsonConverterFactory.create())
+                   .addConverterFactory(GsonConverterFactory.create(gson))
                    .build();
 
             apiService = retrofit.create(ApiService.class);

@@ -1,6 +1,7 @@
 package com.anirudhgv.stockease.data.network;
 
 import com.anirudhgv.stockease.data.model.AuthResponse;
+import com.anirudhgv.stockease.data.model.Inventory;
 import com.anirudhgv.stockease.data.model.Product;
 import com.anirudhgv.stockease.data.model.User;
 import com.anirudhgv.stockease.data.model.dto.OwnerDashboardData;
@@ -41,7 +42,6 @@ public interface ApiService {
     @POST("users/owner/{id}/unblock")
     Call<Void> unblockUser(@Path("id") Long userId);
 
-
-
-
+    @GET("inventory")
+    Call<List<Inventory>> getInventory();
 }
