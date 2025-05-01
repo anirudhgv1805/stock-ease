@@ -35,7 +35,7 @@ public class ProductEditActivity extends AppCompatActivity {
     private Product selectedProduct;
 
     private ApiService apiService;
-    private SessionManager sessionManager; // optional
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
