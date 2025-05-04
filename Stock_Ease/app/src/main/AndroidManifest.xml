@@ -37,6 +37,7 @@
         <activity android:hardwareAccelerated="true" android:name=".ui.owner.ViewReportsActivity"/>
         <activity android:hardwareAccelerated="true" android:name=".ui.owner.ProductEditActivity" />
         <activity android:name=".ui.owner.InventoryEditActivity" android:hardwareAccelerated="true" />
+        <activity android:name=".ui.owner.OrderDetailActivity" android:hardwareAccelerated="true" />
 
     </application>
 

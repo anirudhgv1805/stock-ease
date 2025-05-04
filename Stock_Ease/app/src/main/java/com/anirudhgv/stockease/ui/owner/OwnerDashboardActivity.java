@@ -24,6 +24,8 @@ import org.jetbrains.annotations.ApiStatus;
 import org.w3c.dom.Text;
 
 public class OwnerDashboardActivity extends AppCompatActivity {
+
+    private OwnerViewModel ownerViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +46,8 @@ public class OwnerDashboardActivity extends AppCompatActivity {
         TextView processingCount = findViewById(R.id.processingCount);
         TextView completedCount = findViewById(R.id.completedCount);
 
-        OwnerViewModel ownerViewModel = new ViewModelProvider(this).get(OwnerViewModel.class);
-        ownerViewModel.loadOwnerDashboardData();
+        ownerViewModel = new ViewModelProvider(this).get(OwnerViewModel.class);
+        ownerViewModel.refreshData();
 
         ownerViewModel.getOwnerDashboardData().observe(this, data -> {
             if (data != null) {
@@ -53,7 +55,6 @@ public class OwnerDashboardActivity extends AppCompatActivity {
                 processingCount.setText(String.valueOf(data.getProcessingOrders()));
                 completedCount.setText(String.valueOf(data.getCompletedOrders()));
             } else {
-                // Optionally show error message or placeholder
                 pendingCount.setText("—");
                 processingCount.setText("—");
                 completedCount.setText("—");
@@ -124,6 +125,13 @@ public class OwnerDashboardActivity extends AppCompatActivity {
                 startActivity(new Intent(OwnerDashboardActivity.this,InventoryEditActivity.class));
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        ownerViewModel.refreshData();
     }
 
     @Override

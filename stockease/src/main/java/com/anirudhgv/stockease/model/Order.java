@@ -42,7 +42,7 @@ public class Order {
     private List<OrderItem> items;
 
     public enum Status {
-        PENDING, CONFIRMED, PROCESSED, SHIPPED, DELIVERIED, CANCELLED
+        PENDING, CONFIRMED, PROCESSED, SHIPPED, DELIVERED, CANCELLED
     }
 
     public Order() {

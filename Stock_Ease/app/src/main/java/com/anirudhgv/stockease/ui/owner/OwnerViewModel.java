@@ -21,18 +21,18 @@ import retrofit2.Response;
 public class OwnerViewModel extends AndroidViewModel {
 
     private final OwnerDashboardRepository ownerDashboardRepository;
-    private LiveData<OwnerDashboardData> ownerDashboardDataLiveData;
 
     public OwnerViewModel(@NonNull Application application) {
         super(application);
         this.ownerDashboardRepository = new OwnerDashboardRepository(application.getApplicationContext());
     }
 
-    public void loadOwnerDashboardData() {
-        ownerDashboardDataLiveData = ownerDashboardRepository.getOwnerDashboardData();
+    public LiveData<OwnerDashboardData> getOwnerDashboardData() {
+        return ownerDashboardRepository.getOwnerDashboardData();
     }
 
-    public LiveData<OwnerDashboardData> getOwnerDashboardData() {
-        return ownerDashboardDataLiveData;
+    public void refreshData() {
+        ownerDashboardRepository.refreshOwnerDashboardData();
     }
 }
+

@@ -2,9 +2,11 @@ package com.anirudhgv.stockease.data.network;
 
 import com.anirudhgv.stockease.data.model.AuthResponse;
 import com.anirudhgv.stockease.data.model.Inventory;
+import com.anirudhgv.stockease.data.model.Order;
 import com.anirudhgv.stockease.data.model.Product;
 import com.anirudhgv.stockease.data.model.User;
 import com.anirudhgv.stockease.data.model.dto.OwnerDashboardData;
+import com.anirudhgv.stockease.data.model.dto.StatusUpdateDto;
 import com.anirudhgv.stockease.data.model.dto.UserDto;
 
 import java.util.List;
@@ -60,4 +62,10 @@ public interface ApiService {
             @Query("reason") String reason,
             @Query("userId") Long userId
     );
+
+    @PUT("/api/orders/{orderId}/status")
+    Call<Order> updateOrderStatus(@Path("orderId") Long orderId, @Body StatusUpdateDto statusDto);
+
+    @GET("orders")
+    Call<List<Order>> getAllOrders();
 }

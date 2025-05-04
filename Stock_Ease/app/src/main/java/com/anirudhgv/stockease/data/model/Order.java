@@ -12,19 +12,23 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class Order implements Parcelable {
-    private Long id;
+    private Long orderId;
     private UserDto user;
-    private LocalDateTime orderData;
+    private LocalDateTime orderDate;
     private Status status;
     private BigDecimal totalAmount;
     private List<OrderItem> items;
 
     protected Order(Parcel in) {
         if (in.readByte() == 0) {
-            id = null;
+            orderId = null;
         } else {
-            id = in.readLong();
+            orderId = in.readLong();
         }
+        user = in.readParcelable(UserDto.class.getClassLoader());
+        orderDate = (LocalDateTime) in.readSerializable();
+        status = Status.values()[in.readInt()]; // Read the ordinal value of Status
+        totalAmount = (BigDecimal) in.readSerializable();
         items = in.createTypedArrayList(OrderItem.CREATOR);
     }
 
@@ -47,76 +51,53 @@ public class Order implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
-        if (id == null) {
-            dest.writeByte((byte) 0);
+        if (orderId == null) {
+            dest.writeByte((byte) 0);  // Write a flag to indicate that `id` is null
         } else {
-            dest.writeByte((byte) 1);
-            dest.writeLong(id);
+            dest.writeByte((byte) 1);  // Write a flag to indicate that `id` is not null
+            dest.writeLong(orderId);
         }
-        dest.writeTypedList(items);
+
+        dest.writeParcelable(user, flags);  // Write `user` object
+        dest.writeSerializable(orderDate);  // Write `orderDate` as `LocalDateTime`
+        dest.writeInt(status.ordinal());  // Write `status` enum as an integer (ordinal)
+        dest.writeSerializable(totalAmount);  // Write `totalAmount` as `BigDecimal`
+        dest.writeTypedList(items);  // Write list of `OrderItem` objects
     }
 
     public enum Status {
-        PENDING, CONFIRMED, SHIPPED, CANCELLED
+        PENDING, CONFIRMED, PROCESSED, SHIPPED, DELIVERED, CANCELLED
     }
 
-    public Order() {
+    // Getters and Setters
+    public Long getOrderId() { return orderId; }
+    public void setId(Long orderId) { this.orderId = orderId; }
 
-    }
-    public Order(Long id, UserDto user, LocalDateTime orderData, Status status, BigDecimal totalAmount, List<OrderItem> items) {
-        this.id = id;
-        this.user = user;
-        this.orderData = orderData;
-        this.status = status;
-        this.totalAmount = totalAmount;
-        this.items = items;
-    }
+    public UserDto getUser() { return user; }
+    public void setUser(UserDto user) { this.user = user; }
 
-    public Long getId() {
-        return id;
-    }
+    public LocalDateTime getOrderDate() { return orderDate; }
+    public void setOrderDate(LocalDateTime orderDate) { this.orderDate = orderDate; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Status getStatus() { return status; }
+    public void setStatus(Status status) { this.status = status; }
 
-    public UserDto getUser() {
-        return user;
-    }
+    public BigDecimal getTotalAmount() { return totalAmount; }
+    public void setTotalAmount(BigDecimal totalAmount) { this.totalAmount = totalAmount; }
 
-    public void setUser(UserDto user) {
-        this.user = user;
-    }
+    public List<OrderItem> getItems() { return items; }
+    public void setItems(List<OrderItem> items) { this.items = items; }
 
-    public LocalDateTime getOrderData() {
-        return orderData;
-    }
-
-    public void setOrderData(LocalDateTime orderData) {
-        this.orderData = orderData;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public BigDecimal getTotalAmount() {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(BigDecimal totalAmount) {
-        this.totalAmount = totalAmount;
-    }
-
-    public List<OrderItem> getItems() {
-        return items;
-    }
-
-    public void setItems(List<OrderItem> items) {
-        this.items = items;
+    @NonNull
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + orderId +
+                ", user=" + user +
+                ", orderDate=" + orderDate +
+                ", status=" + status +
+                ", totalAmount=" + totalAmount +
+                ", items=" + items +
+                '}';
     }
 }

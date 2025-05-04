@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.anirudhgv.stockease.model.Order;
+import com.anirudhgv.stockease.model.dto.StatusUpdateDto;
 import com.anirudhgv.stockease.service.OrderService;
 
 @RestController
@@ -48,5 +49,10 @@ public class OrderController {
         orderService.deleteOrder(id);
         return ResponseEntity.ok().build();
     }
-}
 
+    @PutMapping("/{id}/status")
+    public Order updateOrderStatus(@PathVariable Long id, @RequestBody StatusUpdateDto statusDto) {
+        return orderService.updateOrderStatus(id, statusDto.getStatus());
+    }
+
+}

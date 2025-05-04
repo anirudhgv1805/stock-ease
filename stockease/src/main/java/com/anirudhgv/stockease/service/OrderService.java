@@ -124,9 +124,16 @@ public class OrderService {
         Long[] res = new Long[] {
             allOrders.stream().filter(order -> order.getStatus().equals(Order.Status.PENDING)).count(),
             allOrders.stream().filter(order -> order.getStatus().equals(Order.Status.PROCESSED)).count(),
-            allOrders.stream().filter(order -> order.getStatus().equals(Order.Status.CONFIRMED)).count()
+            allOrders.stream().filter(order -> order.getStatus().equals(Order.Status.DELIVERED)).count()
         };
         return res;
     }
+
+    public Order updateOrderStatus(Long id, String status) {
+        Order order = getOrderById(id);
+        order.setStatus(Order.Status.valueOf(status.toUpperCase()));
+        return orderRepository.save(order);
+    }
+    
     
 }

@@ -18,32 +18,34 @@ import retrofit2.Response;
 public class OwnerDashboardRepository {
 
     private final ApiService apiService;
+    private MutableLiveData<OwnerDashboardData> dashboardDataLiveData;
 
     public OwnerDashboardRepository(Context context) {
         SessionManager sessionManager = new SessionManager(context);
         this.apiService = ApiClient.getApiService(sessionManager);
+        this.dashboardDataLiveData = new MutableLiveData<>();
     }
 
+    // This will be the single source of data for the UI
     public LiveData<OwnerDashboardData> getOwnerDashboardData() {
-        MutableLiveData<OwnerDashboardData> dashboardData = new MutableLiveData<>();
+        return dashboardDataLiveData;
+    }
 
+    public void refreshOwnerDashboardData() {
         apiService.getOwnerDashboardData().enqueue(new Callback<OwnerDashboardData>() {
             @Override
             public void onResponse(@NonNull Call<OwnerDashboardData> call, @NonNull Response<OwnerDashboardData> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    dashboardData.setValue(response.body());
+                    dashboardDataLiveData.setValue(response.body());
                 } else {
-                    dashboardData.setValue(null); // optionally handle error state
+                    dashboardDataLiveData.setValue(null); // Optionally handle error state
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<OwnerDashboardData> call, @NonNull Throwable t) {
-                dashboardData.setValue(null); // optionally handle error
+                dashboardDataLiveData.setValue(null); // Optionally handle error
             }
         });
-
-        return dashboardData;
     }
-
 }

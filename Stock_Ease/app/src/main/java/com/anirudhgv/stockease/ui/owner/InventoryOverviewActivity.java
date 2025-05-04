@@ -36,7 +36,7 @@ public class InventoryOverviewActivity extends AppCompatActivity implements Inve
         recyclerView.setAdapter(adapter);
 
         adapter.setOnItemClickListener(this);
-        ApiService apiService = ApiClient.getApiService(new SessionManager(getApplicationContext())); // No need to pass the SessionManager
+        ApiService apiService = ApiClient.getApiService(new SessionManager(getApplicationContext()));
 
         apiService.getInventory().enqueue(new Callback<List<Inventory>>() {
             @Override

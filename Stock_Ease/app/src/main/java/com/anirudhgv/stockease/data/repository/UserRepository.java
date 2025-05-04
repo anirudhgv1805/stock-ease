@@ -52,7 +52,10 @@ public class UserRepository {
         apiService.blockUser(userId).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call,@NonNull Response<Void> response) {
-                if (response.isSuccessful()) onSuccess.run();
+                if (response.isSuccessful()) {
+                    onSuccess.run();
+                    getAllUsers();
+                }
                 else onFailure.run();
             }
 
@@ -67,7 +70,10 @@ public class UserRepository {
         apiService.unblockUser(userId).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call,@NonNull Response<Void> response) {
-                if (response.isSuccessful()) onSuccess.run();
+                if (response.isSuccessful()) {
+                    onSuccess.run();
+                    getAllUsers();
+                }
                 else onFailure.run();
             }
 
