@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Product implements Parcelable {
     private Long id;
@@ -14,7 +15,7 @@ public class Product implements Parcelable {
     private String description;
     private String sku;
     private BigDecimal price;
-    private LocalDateTime createdAt;
+    private transient LocalDateTime createdAt;
 
     public Product () {
     }
@@ -43,6 +44,12 @@ public class Product implements Parcelable {
         name = in.readString();
         description = in.readString();
         sku = in.readString();
+        price = new BigDecimal(in.readString());
+
+        String dateStr = in.readString();
+        if (dateStr != null) {
+            createdAt = LocalDateTime.parse(dateStr, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        }
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
@@ -121,5 +128,21 @@ public class Product implements Parcelable {
         dest.writeString(name);
         dest.writeString(description);
         dest.writeString(sku);
+        dest.writeString(price != null ? price.toPlainString() : "0");
+
+        dest.writeString(createdAt != null ? createdAt.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) : null);
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", sku='" + sku + '\'' +
+                ", price=" + price +
+                ", createdAt=" + createdAt +
+                '}';
     }
 }

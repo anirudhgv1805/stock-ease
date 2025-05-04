@@ -93,11 +93,23 @@ public class Inventory implements Parcelable {
             dest.writeByte((byte) 1);
             dest.writeLong(inventoryId);
         }
+        dest.writeParcelable(product, flags);
         if (quantity == null) {
             dest.writeByte((byte) 0);
         } else {
             dest.writeByte((byte) 1);
             dest.writeInt(quantity);
         }
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Inventory{" +
+                "inventoryId=" + inventoryId +
+                ", product=" + product +
+                ", quantity=" + quantity +
+                ", lastUpdated=" + lastUpdated +
+                '}';
     }
 }

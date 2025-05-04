@@ -18,9 +18,14 @@ import java.util.List;
 public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.InventoryViewHolder> {
 
     private List<Inventory> inventoryList = new ArrayList<>();
+    private onItemClickListener listener;
     public void setInventoryList(List<Inventory> list) {
         this.inventoryList = list;
         notifyDataSetChanged();
+    }
+
+    public void setOnItemClickListener(onItemClickListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
@@ -38,6 +43,12 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Inve
         holder.textName.setText("Name: " + product.getName());
         holder.textSku.setText("SKU: " + product.getSku());
         holder.textQuantity.setText("Quantity: " + inventory.getQuantity());
+
+        holder.itemView.setOnClickListener(v -> {
+            if(listener != null) {
+                listener.onItemCLick(inventory);
+            }
+        });
     }
 
     @Override

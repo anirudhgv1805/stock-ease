@@ -123,7 +123,7 @@ public class OrderService {
         List<Order> allOrders = orderRepository.findAll();
         Long[] res = new Long[] {
             allOrders.stream().filter(order -> order.getStatus().equals(Order.Status.PENDING)).count(),
-            allOrders.stream().filter(order -> order.getStatus().equals(Order.Status.PROCESSING)).count(),
+            allOrders.stream().filter(order -> order.getStatus().equals(Order.Status.PROCESSED)).count(),
             allOrders.stream().filter(order -> order.getStatus().equals(Order.Status.CONFIRMED)).count()
         };
         return res;

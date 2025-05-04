@@ -2,45 +2,44 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:layout_height="wrap_content"
-    android:layout_centerInParent="true">
 
-    <Spinner
-        android:id="@+id/spinnerProduct"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:spinnerMode="dropdown"
-        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <EditText
-        android:id="@+id/editName"
-        android:hint="Product Name"
-        android:layout_width="400dp"
-        android:layout_height="match_parent"/>
+        <Spinner
+            android:id="@+id/spinnerProduct"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:spinnerMode="dropdown" />
 
-    <EditText
-        android:id="@+id/editSku"
-        android:hint="SKU"
-        android:layout_width="400dp"
-        android:layout_height="match_parent"/>
+        <EditText
+            android:id="@+id/editName"
+            android:layout_width="400dp"
+            android:layout_height="match_parent"
+            android:hint="Product Name" />
 
-    <EditText
-        android:id="@+id/editPrice"
-        android:hint="Price"
-        android:inputType="numberDecimal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        <EditText
+            android:id="@+id/editSku"
+            android:layout_width="400dp"
+            android:layout_height="match_parent"
+            android:hint="SKU" />
 
-    <Button
-        android:id="@+id/btnUpdateProduct"
-        android:text="Update Product"
-        android:layout_width="400dp"
-        android:layout_height="match_parent"/>
-</LinearLayout>
+        <EditText
+            android:id="@+id/editPrice"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Price"
+            android:inputType="numberDecimal" />
+
+        <Button
+            android:id="@+id/btnUpdateProduct"
+            android:layout_width="400dp"
+            android:layout_height="match_parent"
+            android:text="Update Product" />
+    </LinearLayout>
 
 </RelativeLayout>

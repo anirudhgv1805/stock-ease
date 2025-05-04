@@ -1,5 +1,6 @@
 package com.anirudhgv.stockease.data.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class User {

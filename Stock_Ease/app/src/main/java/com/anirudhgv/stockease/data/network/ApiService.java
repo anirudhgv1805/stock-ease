@@ -16,6 +16,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiService {
     @GET("test")
@@ -51,4 +52,12 @@ public interface ApiService {
 
     @GET("products")
     Call<List<Product>> getAllProducts();
+
+    @PUT("inventory/update/{productId}")
+    Call<Inventory> updateInventory(
+            @Path("productId") Long productId,
+            @Query("quantityChange") int quantityChange,
+            @Query("reason") String reason,
+            @Query("userId") Long userId
+    );
 }

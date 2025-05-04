@@ -35,6 +35,7 @@ public class InventoryOverviewActivity extends AppCompatActivity implements Inve
         adapter = new InventoryAdapter();
         recyclerView.setAdapter(adapter);
 
+        adapter.setOnItemClickListener(this);
         ApiService apiService = ApiClient.getApiService(new SessionManager(getApplicationContext())); // No need to pass the SessionManager
 
         apiService.getInventory().enqueue(new Callback<List<Inventory>>() {
@@ -57,6 +58,14 @@ public class InventoryOverviewActivity extends AppCompatActivity implements Inve
 
     @Override
     public void onItemCLick(Inventory item) {
-//        startActivity(new Intent(this, InventoryEditActivity.class).putExtras());
+        Intent intent = new Intent(this,InventoryEditActivity.class);
+        intent.putExtra("inventory_id", item.getInventoryId());
+        intent.putExtra("product_id", item.getProduct().getId());
+        intent.putExtra("product_name", item.getProduct().getName());
+        intent.putExtra("product_sku", item.getProduct().getSku());
+        intent.putExtra("product_description", item.getProduct().getDescription());
+        intent.putExtra("product_price", item.getProduct().getPrice().toPlainString());
+        intent.putExtra("quantity", item.getQuantity());
+        startActivity(intent);
     }
 }
