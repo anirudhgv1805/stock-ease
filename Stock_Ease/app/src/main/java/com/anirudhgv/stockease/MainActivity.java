@@ -1,7 +1,10 @@
 package com.anirudhgv.stockease;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Display;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -25,6 +28,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Display.Mode[] refreshRates = display.getSupportedModes();
+
+        for (Display.Mode refreshRate : refreshRates) {
+            Log.d("Supported Refresh Rates", "Rate: " + refreshRate);
+        }
+
+        for (Display.Mode refreshRate : refreshRates) {
+
+            if (refreshRate.getRefreshRate() == 90.0f) {
+                display.getSupportedModes();
+                break;
+            }
+        }
 
         SessionManager sessionManager = new SessionManager(this);
 

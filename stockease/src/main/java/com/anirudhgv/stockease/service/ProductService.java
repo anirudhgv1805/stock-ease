@@ -1,6 +1,5 @@
 package com.anirudhgv.stockease.service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +9,6 @@ import com.anirudhgv.stockease.errorHandler.ResourceNotFoundException;
 import com.anirudhgv.stockease.model.Product;
 import com.anirudhgv.stockease.model.dto.ProductUpdateRequest;
 import com.anirudhgv.stockease.repository.ProductRepository;
-
-import aj.org.objectweb.asm.commons.LocalVariablesSorter;
 
 @Service
 public class ProductService {

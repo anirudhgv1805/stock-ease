@@ -67,6 +67,7 @@ public class ProductEditActivity extends AppCompatActivity {
         });
 
         btnUpdate.setOnClickListener(v -> {
+            v.setClickable(false);
             selectedProduct.setName(editName.getText().toString());
             selectedProduct.setSku(editSku.getText().toString());
             selectedProduct.setPrice(BigDecimal.valueOf(Double.parseDouble(editPrice.getText().toString())));
@@ -78,6 +79,7 @@ public class ProductEditActivity extends AppCompatActivity {
                         public void onResponse(Call<Product> call, Response<Product> response) {
                             if (response.isSuccessful()) {
                                 Toast.makeText(ProductEditActivity.this, "Product updated!", Toast.LENGTH_SHORT).show();
+                                v.setClickable(true);
                             } else {
                                 Toast.makeText(ProductEditActivity.this, "Update failed!", Toast.LENGTH_SHORT).show();
                             }
@@ -98,7 +100,7 @@ public class ProductEditActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     productList = response.body();
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(ProductEditActivity.this,
-                            android.R.layout.simple_spinner_item,
+                            android.R.layout.simple_spinner_dropdown_item,
                             productList.stream().map(Product::getSku).collect(Collectors.toList()));
                     spinnerProduct.setAdapter(adapter);
                 }

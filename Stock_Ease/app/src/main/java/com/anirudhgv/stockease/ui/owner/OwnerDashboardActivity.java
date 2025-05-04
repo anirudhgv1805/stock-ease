@@ -20,6 +20,7 @@ import com.anirudhgv.stockease.data.storage.SessionManager;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 
+import org.jetbrains.annotations.ApiStatus;
 import org.w3c.dom.Text;
 
 public class OwnerDashboardActivity extends AppCompatActivity {
@@ -37,6 +38,7 @@ public class OwnerDashboardActivity extends AppCompatActivity {
         TextView createProductBtn = findViewById(R.id.createProductBtn);
         TextView manageOrdersBtn = findViewById(R.id.manageOrdersBtn);
         TextView manageProductsBtn = findViewById(R.id.manageProductsBtn);
+        TextView manageInventoryBtn = findViewById(R.id.manageInventoryBtn);
 
         TextView pendingCount = findViewById(R.id.pendingCount);
         TextView processingCount = findViewById(R.id.processingCount);
@@ -115,7 +117,15 @@ public class OwnerDashboardActivity extends AppCompatActivity {
                 startActivity(new Intent(OwnerDashboardActivity.this, ProductEditActivity.class));
             }
         });
+
+        manageInventoryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v) {
+                startActivity(new Intent(OwnerDashboardActivity.this,InventoryEditActivity.class));
+            }
+        });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.owner_nav_menu, menu);

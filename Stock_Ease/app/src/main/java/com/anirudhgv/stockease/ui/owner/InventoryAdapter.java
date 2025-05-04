@@ -3,6 +3,7 @@ package com.anirudhgv.stockease.ui.owner;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +18,6 @@ import java.util.List;
 public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.InventoryViewHolder> {
 
     private List<Inventory> inventoryList = new ArrayList<>();
-
     public void setInventoryList(List<Inventory> list) {
         this.inventoryList = list;
         notifyDataSetChanged();
@@ -45,7 +45,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Inve
         return inventoryList.size();
     }
 
-    static class InventoryViewHolder extends RecyclerView.ViewHolder {
+    public static class InventoryViewHolder extends RecyclerView.ViewHolder {
         TextView textName,textSku, textQuantity;
 
         public InventoryViewHolder(@NonNull View itemView) {
