@@ -6,40 +6,40 @@ import java.util.Objects;
 
 public class OwnerDashboardData {
 
-    private int pendingOrders;
-    private int processingOrders;
-    private int completedOrders;
+    private Long pendingOrders;  
+    private Long processingOrders;
+    private Long completedOrders;
 
     public OwnerDashboardData() {
     }
 
-    public OwnerDashboardData(int pendingOrders, int processingOrders, int completedOrders) {
+    public OwnerDashboardData(Long pendingOrders, Long processingOrders, Long completedOrders) {
         this.pendingOrders = pendingOrders;
         this.processingOrders = processingOrders;
         this.completedOrders = completedOrders;
     }
 
-    public int getPendingOrders() {
+    public Long getPendingOrders() {
         return pendingOrders;
     }
 
-    public void setPendingOrders(int pendingOrders) {
+    public void setPendingOrders(Long pendingOrders) {
         this.pendingOrders = pendingOrders;
     }
 
-    public int getProcessingOrders() {
+    public Long getProcessingOrders() {
         return processingOrders;
     }
 
-    public void setProcessingOrders(int processingOrders) {
+    public void setProcessingOrders(Long processingOrders) {
         this.processingOrders = processingOrders;
     }
 
-    public int getCompletedOrders() {
+    public Long getCompletedOrders() {
         return completedOrders;
     }
 
-    public void setCompletedOrders(int completedOrders) {
+    public void setCompletedOrders(Long completedOrders) {
         this.completedOrders = completedOrders;
     }
 

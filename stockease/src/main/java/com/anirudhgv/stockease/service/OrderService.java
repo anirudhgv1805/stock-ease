@@ -77,7 +77,8 @@ public class OrderService {
             item.setProduct(product);
 
             Inventory inventory = inventoryRepository.findByProductId(productId)
-                    .orElseThrow(() -> new ResourceNotFoundException("Inventory not found for product ID: " + productId));
+                    .orElseThrow(
+                            () -> new ResourceNotFoundException("Inventory not found for product ID: " + productId));
 
             if (inventory.getQuantity() < item.getQuantity()) {
                 throw new IllegalArgumentException("Insufficient stock for product ID: " + productId);
@@ -117,4 +118,15 @@ public class OrderService {
     public void deleteOrder(Long id) {
         orderRepository.deleteById(id);
     }
+
+    public Long[] getDashboardData() {
+        List<Order> allOrders = orderRepository.findAll();
+        Long[] res = new Long[] {
+            allOrders.stream().filter(order -> order.getStatus().equals(Order.Status.PENDING)).count(),
+            allOrders.stream().filter(order -> order.getStatus().equals(Order.Status.PROCESSING)).count(),
+            allOrders.stream().filter(order -> order.getStatus().equals(Order.Status.CONFIRMED)).count()
+        };
+        return res;
+    }
+    
 }

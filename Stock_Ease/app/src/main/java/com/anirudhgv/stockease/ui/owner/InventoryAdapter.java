@@ -55,4 +55,8 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Inve
             textQuantity = itemView.findViewById(R.id.textQuantity);
         }
     }
+
+    public interface onItemClickListener {
+        void onItemCLick(Inventory item);
+    }
 }

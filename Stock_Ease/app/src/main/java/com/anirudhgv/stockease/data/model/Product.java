@@ -1,9 +1,14 @@
 package com.anirudhgv.stockease.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class Product {
+public class Product implements Parcelable {
     private Long id;
     private String name;
     private String description;
@@ -28,6 +33,29 @@ public class Product {
         this.sku = sku;
         this.price = price;
     }
+
+    protected Product(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readLong();
+        }
+        name = in.readString();
+        description = in.readString();
+        sku = in.readString();
+    }
+
+    public static final Creator<Product> CREATOR = new Creator<Product>() {
+        @Override
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
+        }
+
+        @Override
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
 
     public Long getId() {
         return id;
@@ -75,5 +103,23 @@ public class Product {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(id);
+        }
+        dest.writeString(name);
+        dest.writeString(description);
+        dest.writeString(sku);
     }
 }
