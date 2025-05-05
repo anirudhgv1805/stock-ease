@@ -40,7 +40,6 @@ public class OwnerDashboardActivity extends AppCompatActivity {
         TextView createProductBtn = findViewById(R.id.createProductBtn);
         TextView manageOrdersBtn = findViewById(R.id.manageOrdersBtn);
         TextView manageProductsBtn = findViewById(R.id.manageProductsBtn);
-        TextView manageInventoryBtn = findViewById(R.id.manageInventoryBtn);
 
         TextView pendingCount = findViewById(R.id.pendingCount);
         TextView processingCount = findViewById(R.id.processingCount);
@@ -119,12 +118,6 @@ public class OwnerDashboardActivity extends AppCompatActivity {
             }
         });
 
-        manageInventoryBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-                startActivity(new Intent(OwnerDashboardActivity.this,InventoryEditActivity.class));
-            }
-        });
     }
 
     @Override
