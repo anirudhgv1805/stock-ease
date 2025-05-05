@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.anirudhgv.stockease.model.User;
+import com.anirudhgv.stockease.model.dto.UserDto;
 import com.anirudhgv.stockease.model.response.AuthResponse;
 import com.anirudhgv.stockease.repository.UserRepository;
 import com.anirudhgv.stockease.utils.JwtUtil;
@@ -45,7 +46,7 @@ public class AuthService {
         return new AuthResponse("success", "User registered successfully", token, user.getRole());
     }
 
-    public AuthResponse login(User userDto) {
+    public AuthResponse login(UserDto userDto) {
         Optional<User> userOptional = userRepository.findByEmail(userDto.getEmail());
 
         System.out.println("at login"+userDto);

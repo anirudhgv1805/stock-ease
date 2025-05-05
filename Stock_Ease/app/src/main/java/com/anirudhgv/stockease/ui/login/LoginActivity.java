@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.anirudhgv.stockease.R;
 import com.anirudhgv.stockease.data.model.dto.UserDto;
 import com.anirudhgv.stockease.data.storage.SessionManager;
-import com.anirudhgv.stockease.ui.client.ClientDashboardActivity;
+import com.anirudhgv.stockease.ui.ClientDashboardActivity;
 import com.anirudhgv.stockease.ui.employee.EmployeeDashboardActivity;
 import com.anirudhgv.stockease.ui.owner.OwnerDashboardActivity;
 import com.anirudhgv.stockease.ui.register.RegisterActivity;
@@ -47,7 +47,9 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             try {
-                viewModel.login(new UserDto(email, password), sessionManager);
+                UserDto u1 = new UserDto(email, password);
+                viewModel.login(u1, sessionManager);
+                System.out.println(u1);
             } catch (Exception e) {
                 Toast.makeText(getApplicationContext(),"Login Failed"+viewModel.getErrorMessage(),Toast.LENGTH_LONG).show();
             }

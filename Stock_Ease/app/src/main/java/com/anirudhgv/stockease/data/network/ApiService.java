@@ -3,6 +3,7 @@ package com.anirudhgv.stockease.data.network;
 import com.anirudhgv.stockease.data.model.AuthResponse;
 import com.anirudhgv.stockease.data.model.Inventory;
 import com.anirudhgv.stockease.data.model.Order;
+import com.anirudhgv.stockease.data.model.OrderItem;
 import com.anirudhgv.stockease.data.model.Product;
 import com.anirudhgv.stockease.data.model.User;
 import com.anirudhgv.stockease.data.model.dto.OwnerDashboardData;
@@ -14,6 +15,7 @@ import java.util.List;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -68,4 +70,21 @@ public interface ApiService {
 
     @GET("orders")
     Call<List<Order>> getAllOrders();
+
+    @POST("orders")
+    Call<Order> createOrder(@Body Order order);
+
+    @POST("orders")
+    Call<Order> placeOrder(@Body Order order);
+
+    @GET("products/{id}")
+    Call<Product> getProductById(@Path("id") Long productId);
+
+    @PUT("products/{id}")
+    Call<Product> updateProduct(@Path("id") Long productId, @Body Product product);
+
+    @DELETE("products/{id}")
+    Call<Void> deleteProduct(@Path("id") Long productId);
+
+
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.anirudhgv.stockease.model.User;
+import com.anirudhgv.stockease.model.dto.UserDto;
 import com.anirudhgv.stockease.model.response.AuthResponse;
 import com.anirudhgv.stockease.service.AuthService;
 
@@ -26,7 +27,7 @@ public class AuthController {
     @GetMapping("/test")
     public String test() {
         return "Api is working";
-    }
+    } 
     
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody User user) {
@@ -36,7 +37,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody User user) {
+    public ResponseEntity<AuthResponse> login(@RequestBody UserDto user) {
+        System.out.println(user);
         AuthResponse authResponse = authService.login(user);
         return ResponseEntity.ok(authResponse);
     }

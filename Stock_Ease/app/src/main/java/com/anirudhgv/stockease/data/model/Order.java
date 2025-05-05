@@ -19,7 +19,11 @@ public class Order implements Parcelable {
     private BigDecimal totalAmount;
     private List<OrderItem> items;
 
-    protected Order(Parcel in) {
+    public Order() {
+
+    }
+
+    public Order(Parcel in) {
         if (in.readByte() == 0) {
             orderId = null;
         } else {

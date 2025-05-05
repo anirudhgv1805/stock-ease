@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 public class SessionManager {
     private static final String PREF_NAME = "app_pref";
     private static final String KEY_TOKEN = "auth_token";
-    private static final String KEY_USER_ROLE = "user_role";
+    private static final String KEY_USER_ROLE = "OWNER";
 
     private final SharedPreferences preferences;
 
