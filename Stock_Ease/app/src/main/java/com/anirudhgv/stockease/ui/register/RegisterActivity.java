@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.anirudhgv.stockease.R;
 import com.anirudhgv.stockease.data.model.dto.UserDto;
 import com.anirudhgv.stockease.data.storage.SessionManager;
-import com.anirudhgv.stockease.ui.ClientDashboardActivity;
+import com.anirudhgv.stockease.ui.client.ClientDashboardActivity;
 import com.anirudhgv.stockease.ui.employee.StaffDashboardActivity;
 import com.anirudhgv.stockease.ui.owner.OwnerDashboardActivity;
 import com.google.android.material.button.MaterialButton;

@@ -36,7 +36,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public void onBindViewHolder(ProductViewHolder holder, int position) {
         Product product = productList.get(position);
         holder.productName.setText(product.getName());
-        holder.productPrice.setText(String.format("$%.2f", product.getPrice()));
+        holder.productPrice.setText(String.format("₹%.2f", product.getPrice()));
 
         // Optional: You can add an image if the product has an image URL or use a placeholder
         // Glide.with(context).load(product.getImageUrl()).into(holder.productImage);
