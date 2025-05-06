@@ -152,7 +152,7 @@ public class OwnerDashboardActivity extends AppCompatActivity {
         SessionManager sessionManager = new SessionManager(getApplicationContext());
         sessionManager.clearSession();
         Intent intent = new Intent(OwnerDashboardActivity.this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); 
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
     }
