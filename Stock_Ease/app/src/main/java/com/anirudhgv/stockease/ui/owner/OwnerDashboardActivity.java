@@ -151,6 +151,11 @@ public class OwnerDashboardActivity extends AppCompatActivity {
     private void handleLogout(){
         SessionManager sessionManager = new SessionManager(getApplicationContext());
         sessionManager.clearSession();
-        startActivity(new Intent(OwnerDashboardActivity.this, LoginActivity.class));
+        Intent intent = new Intent(OwnerDashboardActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); 
+        startActivity(intent);
+        finish();
     }
+
+
 }
