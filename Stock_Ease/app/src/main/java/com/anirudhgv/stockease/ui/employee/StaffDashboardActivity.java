@@ -9,12 +9,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.anirudhgv.stockease.R;
 import com.anirudhgv.stockease.data.storage.SessionManager;
 
-public class EmployeeDashboardActivity extends AppCompatActivity {
+public class StaffDashboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_owner_dashboard);
+        setContentView(R.layout.activity_staff_dashboard);
 
         SessionManager sessionManager = new SessionManager(getApplicationContext());
 

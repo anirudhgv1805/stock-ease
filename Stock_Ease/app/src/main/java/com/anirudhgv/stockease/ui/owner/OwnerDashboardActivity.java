@@ -11,12 +11,14 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.anirudhgv.stockease.R;
 import com.anirudhgv.stockease.data.storage.SessionManager;
+import com.anirudhgv.stockease.ui.login.LoginActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 
@@ -75,7 +77,7 @@ public class OwnerDashboardActivity extends AppCompatActivity {
         toggle.syncState();
 
         Toast.makeText(this, "At OwnerDashboard", Toast.LENGTH_LONG).show();
-
+;
         inventoryOverviewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,5 +133,24 @@ public class OwnerDashboardActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.owner_nav_menu, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menu) {
+        int id = menu.getItemId();
+
+        if(id == R.id.nav_logout){
+            handleLogout();
+        }
+        if(id == R.id.nav_profile){
+            return true;
+        }
+        return true;
+    }
+
+    private void handleLogout(){
+        SessionManager sessionManager = new SessionManager(getApplicationContext());
+        sessionManager.clearSession();
+        startActivity(new Intent(OwnerDashboardActivity.this, LoginActivity.class));
     }
 }

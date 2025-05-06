@@ -11,7 +11,7 @@ import com.anirudhgv.stockease.R;
 import com.anirudhgv.stockease.data.model.dto.UserDto;
 import com.anirudhgv.stockease.data.storage.SessionManager;
 import com.anirudhgv.stockease.ui.ClientDashboardActivity;
-import com.anirudhgv.stockease.ui.employee.EmployeeDashboardActivity;
+import com.anirudhgv.stockease.ui.employee.StaffDashboardActivity;
 import com.anirudhgv.stockease.ui.owner.OwnerDashboardActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -69,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
                 intent = new Intent(this, ClientDashboardActivity.class);
                 break;
             case "employee":
-                intent = new Intent(this, EmployeeDashboardActivity.class);
+                intent = new Intent(this, StaffDashboardActivity.class);
                 break;
             case "owner":
                 intent = new Intent(this, OwnerDashboardActivity.class);

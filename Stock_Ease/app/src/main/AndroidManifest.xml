@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:hardwareAccelerated="true" android:name=".ui.ClientDashboardActivity" />
-        <activity android:hardwareAccelerated="true" android:name=".ui.employee.EmployeeDashboardActivity"/>
+        <activity android:hardwareAccelerated="true" android:name=".ui.employee.StaffDashboardActivity"/>
         <activity android:hardwareAccelerated="true" android:name=".ui.owner.OwnerDashboardActivity"/>
         <activity android:hardwareAccelerated="true" android:name=".ui.login.LoginActivity"/>
         <activity android:hardwareAccelerated="true" android:name=".ui.register.RegisterActivity"/>

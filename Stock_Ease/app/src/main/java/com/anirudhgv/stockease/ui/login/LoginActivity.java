@@ -12,7 +12,7 @@ import com.anirudhgv.stockease.R;
 import com.anirudhgv.stockease.data.model.dto.UserDto;
 import com.anirudhgv.stockease.data.storage.SessionManager;
 import com.anirudhgv.stockease.ui.ClientDashboardActivity;
-import com.anirudhgv.stockease.ui.employee.EmployeeDashboardActivity;
+import com.anirudhgv.stockease.ui.employee.StaffDashboardActivity;
 import com.anirudhgv.stockease.ui.owner.OwnerDashboardActivity;
 import com.anirudhgv.stockease.ui.register.RegisterActivity;
 import com.google.android.material.button.MaterialButton;
@@ -90,8 +90,8 @@ public class LoginActivity extends AppCompatActivity {
             case "client":
                 intent = new Intent(this, ClientDashboardActivity.class);
                 break;
-            case "employee":
-                intent = new Intent(this, EmployeeDashboardActivity.class);
+            case "staff":
+                intent = new Intent(this, StaffDashboardActivity.class);
                 break;
             case "owner":
                 intent = new Intent(this, OwnerDashboardActivity.class);
