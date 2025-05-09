@@ -13,7 +13,7 @@ import com.anirudhgv.stockease.R;
 import com.anirudhgv.stockease.data.model.Order;
 import com.anirudhgv.stockease.data.model.OrderItem;
 import com.anirudhgv.stockease.data.model.Product;
-import com.anirudhgv.stockease.ui.adapter.ProductAdapter;
+import com.anirudhgv.stockease.ui.client.ProductAdapter;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -60,7 +60,7 @@ public class ClientDashboardActivity extends AppCompatActivity {
         BigDecimal totalAmount = BigDecimal.ZERO;
 
         for (Product product : productList) {
-            int quantity = 1; // default quantity
+            int quantity = 1;
             BigDecimal priceAtOrder = product.getPrice();
             OrderItem orderItem = new OrderItem(null, null, product, quantity, priceAtOrder);
             orderItems.add(orderItem);
@@ -71,6 +71,7 @@ public class ClientDashboardActivity extends AppCompatActivity {
         order.setItems(orderItems);
         order.setTotalAmount(totalAmount);
         order.setStatus(Order.Status.PENDING);
+        
 
         orderViewModel.placeOrder(order).observe(this, success -> {
             if (success) {

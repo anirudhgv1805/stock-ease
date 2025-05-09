@@ -5,14 +5,12 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- RecyclerView for displaying the product list -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/product_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
-    <!-- Button to place the order -->
     <Button
         android:id="@+id/place_order_button"
         android:layout_width="match_parent"

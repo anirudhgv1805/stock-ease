@@ -1,4 +1,4 @@
-package com.anirudhgv.stockease.ui.adapter;
+package com.anirudhgv.stockease.ui.client;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -38,8 +38,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.productName.setText(product.getName());
         holder.productPrice.setText(String.format("₹%.2f", product.getPrice()));
 
-        // Optional: You can add an image if the product has an image URL or use a placeholder
-        // Glide.with(context).load(product.getImageUrl()).into(holder.productImage);
 
         holder.itemView.setOnClickListener(v -> onProductClickListener.onProductClick(product));
     }

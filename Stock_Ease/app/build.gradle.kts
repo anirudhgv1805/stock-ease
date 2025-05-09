@@ -56,4 +56,6 @@ dependencies {
     implementation(libs.bundles.lifecycle)
     implementation(libs.bundles.network)
     implementation(libs.jmdns)
+
+    implementation(libs.swiperefreshlayout)
 }

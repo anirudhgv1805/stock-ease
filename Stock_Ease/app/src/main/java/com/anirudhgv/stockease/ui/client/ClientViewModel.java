@@ -28,8 +28,7 @@ public class ClientViewModel extends AndroidViewModel {
         orderRepository = new OrderRepository(application);
     }
 
-    // 📦 Fetch available products
-    public void fetchProducts() {
+     public void fetchProducts() {
         productRepository.getAllProducts().observeForever(productList::setValue);
     }
     public void placeOrder(Order order) {
