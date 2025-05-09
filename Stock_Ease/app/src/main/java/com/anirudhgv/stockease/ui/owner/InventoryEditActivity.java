@@ -80,7 +80,7 @@ public class InventoryEditActivity extends AppCompatActivity {
 
     private void updateInventory() {
 
-        ApiService apiService = ApiClient.getApiService(new SessionManager(getApplicationContext())); // No need to pass the SessionManager
+        ApiService apiService = ApiClient.getApiService(new SessionManager(getApplicationContext()));
 
         String newQuantityStr = quantityEditText.getText().toString().trim();
         String reason = reasonEditText.getText().toString().trim();
@@ -92,16 +92,21 @@ public class InventoryEditActivity extends AppCompatActivity {
 
         int newQuantity = Integer.parseInt(newQuantityStr);
         System.out.println("newQuantity:" + newQuantity+"already in"+inventoryItem.getQuantity());
-        int quantityChange = newQuantity - inventoryItem.getQuantity();
+        int quantityChange = inventoryItem.getQuantity() - newQuantity;
 
         if (quantityChange == 0) {
             Toast.makeText(this, "No change in quantity", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        if (quantityChange < 0) {
+            Toast.makeText(this, "Negative change in quantity", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
         apiService.updateInventory(
                 product.getId(),
-                quantityChange,
+                newQuantity,
                 reason,
                 userId
         ).enqueue(new Callback<Inventory>() {
