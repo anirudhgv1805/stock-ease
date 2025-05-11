@@ -22,6 +22,8 @@ public class Product {
     @Column(name="product_id")
     private Long id;
 
+    private String productImgUrl;
+
     private String name;
 
     private String description;
@@ -123,6 +125,15 @@ public class Product {
     public Product createdAt(LocalDateTime createdAt) {
         setCreatedAt(createdAt);
         return this;
+    }
+
+    
+    public String getProductImgUrl() {
+        return this.productImgUrl;
+    }
+
+    public void setProductImgUrl(String productImgUrl) {
+        this.productImgUrl = productImgUrl;
     }
 
     @Override

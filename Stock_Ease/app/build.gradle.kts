@@ -58,4 +58,7 @@ dependencies {
     implementation(libs.jmdns)
 
     implementation(libs.swiperefreshlayout)
+
+    implementation(libs.glide)
+    annotationProcessor(libs.glide.compiler)
 }

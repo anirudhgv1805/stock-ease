@@ -12,13 +12,15 @@ import java.time.format.DateTimeFormatter;
 public class Product implements Parcelable {
     private Long id;
     private String name;
+    private String productImgUrl;
     private String description;
     private String sku;
     private BigDecimal price;
     private transient LocalDateTime createdAt;
 
-    public Product () {
+    public Product() {
     }
+
     public Product(Long id, String name, String description, String sku, BigDecimal price, LocalDateTime createdAt) {
         this.id = id;
         this.name = name;
@@ -112,6 +114,15 @@ public class Product implements Parcelable {
         this.createdAt = createdAt;
     }
 
+    public String getProductImgUrl() {
+        return this.productImgUrl;
+    }
+
+    public void setProductImgUrl(String productImgUrl) {
+        this.productImgUrl = productImgUrl;
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -136,13 +147,6 @@ public class Product implements Parcelable {
     @NonNull
     @Override
     public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", sku='" + sku + '\'' +
-                ", price=" + price +
-                ", createdAt=" + createdAt +
-                '}';
+        return "Product{" + "id=" + id + ", name='" + name + '\'' + ", description='" + description + '\'' + ", sku='" + sku + '\'' + ", price=" + price + ", createdAt=" + createdAt + '}';
     }
 }

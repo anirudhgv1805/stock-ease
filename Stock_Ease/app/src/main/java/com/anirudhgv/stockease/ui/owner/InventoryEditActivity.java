@@ -103,7 +103,7 @@ public class InventoryEditActivity extends AppCompatActivity {
             Toast.makeText(this, "Negative change in quantity", Toast.LENGTH_SHORT).show();
             return;
         }
-        
+
         apiService.updateInventory(
                 product.getId(),
                 newQuantity,

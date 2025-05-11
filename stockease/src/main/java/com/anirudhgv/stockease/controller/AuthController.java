@@ -1,5 +1,7 @@
 package com.anirudhgv.stockease.controller;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +28,7 @@ public class AuthController {
 
     @GetMapping("/test")
     public String test() {
+        System.out.println("Working"+LocalDateTime.now().toString());
         return "Api is working";
     } 
     

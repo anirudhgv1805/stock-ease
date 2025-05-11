@@ -14,6 +14,8 @@ multidex = "2.0.1"
 recyclerview = "1.4.0"
 jmdns = "3.5.7"
 swiperefreshlayout = "1.1.0"
+glide="4.16.0"
+
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -39,6 +41,8 @@ multidex = { module = "androidx.multidex:multidex", version.ref = "multidex" }
 jmdns = { module = "org.jmdns:jmdns", version.ref = "jmdns" }
 
 swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref= "swiperefreshlayout"}
+glide = { module= "com.github.bumptech.glide:glide", version.ref="glide"}
+glide-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -46,3 +50,5 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 [bundles]
 lifecycle = ["lifecycle-viewmodel", "lifecycle-livedata", "lifecycle-viewmodel-ktx"]
 network = ["retrofit", "converter-gson", "okhttp", "okhttp-logging"]
+glide = ["glide", "glide-compiler"]
+
