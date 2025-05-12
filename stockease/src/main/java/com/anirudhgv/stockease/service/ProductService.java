@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.anirudhgv.stockease.errorHandler.ResourceNotFoundException;
+import com.anirudhgv.stockease.model.Inventory;
 import com.anirudhgv.stockease.model.Product;
 import com.anirudhgv.stockease.model.dto.ProductUpdateRequest;
 import com.anirudhgv.stockease.repository.ProductRepository;
@@ -15,6 +16,9 @@ public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private InventoryService inventoryService;
 
     public List<Product> getAllProducts() {
         return productRepository.findAll();
@@ -26,7 +30,14 @@ public class ProductService {
     }
 
     public Product createProduct(Product product) {
-        return productRepository.save(product);
+        Product savedProduct = productRepository.save(product);
+
+        Inventory inventory = new Inventory();
+        inventory.setProduct(savedProduct);
+        inventory.setQuantity(0);
+        inventoryService.createInventory(inventory);
+
+        return savedProduct;
     }
 
     public Product updateProduct(Long id, ProductUpdateRequest request) {

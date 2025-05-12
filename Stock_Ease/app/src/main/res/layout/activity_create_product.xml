@@ -56,6 +56,23 @@
                 android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <ImageView
+            android:id="@+id/productImagePreview"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="Product Image"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/selectImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Image"
+            android:layout_marginTop="8dp"/>
+
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/createProductButton"
             android:layout_width="match_parent"
