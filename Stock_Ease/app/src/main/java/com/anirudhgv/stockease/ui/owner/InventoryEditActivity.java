@@ -122,6 +122,7 @@ public class InventoryEditActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Inventory> call, Throwable t) {
+
                 Toast.makeText(InventoryEditActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

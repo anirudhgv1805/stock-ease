@@ -46,9 +46,10 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Inve
         holder.textSku.setText("SKU: " + product.getSku());
         holder.textQuantity.setText("Quantity: " + inventory.getQuantity());
 
-        if((product.getProductImgUrl() != null) &&(!product.getProductImgUrl().isEmpty())){
+        String imageUrl = product.getProductImgUrl();
+        if (imageUrl != null && !imageUrl.isEmpty()) {
             Glide.with(holder.itemView.getContext())
-                    .load(product.getProductImgUrl())
+                    .load(imageUrl)
                     .placeholder(R.drawable.ic_launcher_foreground)
                     .error(R.drawable.ic_launcher_background)
                     .into(holder.productImg);
