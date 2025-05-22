@@ -21,6 +21,7 @@ import com.anirudhgv.stockease.ui.client.ProductAdapter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ClientDashboardActivity extends AppCompatActivity {
 
@@ -63,31 +64,37 @@ public class ClientDashboardActivity extends AppCompatActivity {
         List<OrderItem> orderItems = new ArrayList<>();
         BigDecimal totalAmount = BigDecimal.ZERO;
 
+        Map<Long, Integer> quantityMap = productAdapter.getProductQuantities();
+
         for (Product product : productList) {
-            int quantity = 1;
-            BigDecimal priceAtOrder = product.getPrice();
-            OrderItem orderItem = new OrderItem(null, null, product, quantity, priceAtOrder);
-            orderItems.add(orderItem);
-            totalAmount = totalAmount.add(priceAtOrder.multiply(BigDecimal.valueOf(quantity)));
+            int quantity = quantityMap.getOrDefault(product.getId(), 0);
+
+            if (quantity > 0) {
+                BigDecimal priceAtOrder = product.getPrice();
+                OrderItem orderItem = new OrderItem(null, null, product, quantity, priceAtOrder);
+                orderItems.add(orderItem);
+                totalAmount = totalAmount.add(priceAtOrder.multiply(BigDecimal.valueOf(quantity)));
+            }
         }
 
         UserDto user = new UserDto();
-        if(sessionManager !=null) {
+        if (sessionManager != null) {
             user.setId(sessionManager.fetchUserId());
         }
+
         Order order = new Order();
         order.setUser(user);
         order.setItems(orderItems);
         order.setTotalAmount(totalAmount);
         order.setStatus(Order.Status.PENDING);
-        
 
         orderViewModel.placeOrder(order).observe(this, success -> {
             if (success) {
                 Toast.makeText(this, "Order placed successfully", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Order Successful", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Order failed", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 }

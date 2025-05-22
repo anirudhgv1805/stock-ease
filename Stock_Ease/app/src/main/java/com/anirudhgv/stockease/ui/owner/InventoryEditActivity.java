@@ -92,7 +92,7 @@ public class InventoryEditActivity extends AppCompatActivity {
 
         int newQuantity = Integer.parseInt(newQuantityStr);
         System.out.println("newQuantity:" + newQuantity+"already in"+inventoryItem.getQuantity());
-        int quantityChange = inventoryItem.getQuantity() - newQuantity;
+        int quantityChange = inventoryItem.getQuantity() + newQuantity;
 
         if (quantityChange == 0) {
             Toast.makeText(this, "No change in quantity", Toast.LENGTH_SHORT).show();
