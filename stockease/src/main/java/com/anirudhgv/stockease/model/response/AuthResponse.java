@@ -10,15 +10,17 @@ public class AuthResponse {
     private String message;
     private String accessToken;
     private Role role;
+    private Long userId;
 
     public AuthResponse() {
     }
 
-    public AuthResponse(String status, String message, String accessToken, Role role) {
+    public AuthResponse(String status, String message, String accessToken, Role role, Long userId) {
         this.status = status;
         this.message = message;
         this.accessToken = accessToken;
         this.role = role;
+        this.userId = userId;
     }
 
     public String getStatus() {
@@ -61,6 +63,14 @@ public class AuthResponse {
     public AuthResponse message(String message) {
         setMessage(message);
         return this;
+    }
+    
+    public Long getUserId() {
+        return this.userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public AuthResponse accessToken(String accessToken) {

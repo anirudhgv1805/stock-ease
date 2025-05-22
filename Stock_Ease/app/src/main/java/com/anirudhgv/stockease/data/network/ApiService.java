@@ -57,7 +57,7 @@ public interface ApiService {
     @GET("products")
     Call<List<Product>> getAllProducts();
 
-    @PUT("inventory/update/{productId}")
+    @POST("inventory/update/{productId}")
     Call<Inventory> updateInventory(
             @Path("productId") Long productId,
             @Query("quantityChange") int quantityChange,

@@ -37,7 +37,6 @@ public class OwnerDashboardActivity extends AppCompatActivity {
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         MaterialToolbar topAppBar = findViewById(R.id.topAppBar);
         TextView inventoryOverviewBtn = findViewById(R.id.inventoryOverviewBtn);
-        TextView viewReportsBtn = findViewById(R.id.viewReportsBtn);
         TextView manageUsersBtn = findViewById(R.id.manageUsersBtn);
         TextView createProductBtn = findViewById(R.id.createProductBtn);
         TextView manageOrdersBtn = findViewById(R.id.manageOrdersBtn);
@@ -85,12 +84,7 @@ public class OwnerDashboardActivity extends AppCompatActivity {
             }
         });
 
-        viewReportsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(OwnerDashboardActivity.this, ViewReportsActivity.class));
-            }
-        });
+
 
         manageUsersBtn.setOnClickListener(new View.OnClickListener() {
             @Override

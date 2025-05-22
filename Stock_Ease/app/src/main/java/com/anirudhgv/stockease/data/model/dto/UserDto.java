@@ -17,6 +17,10 @@ public class UserDto implements Parcelable {
     private Role role;
     private LocalDateTime createdAt;
 
+    public UserDto() {
+
+    }
+
     public UserDto(Long id, String username, String password, String email, Role role, LocalDateTime createdAt) {
         this.id = id;
         this.username = username;

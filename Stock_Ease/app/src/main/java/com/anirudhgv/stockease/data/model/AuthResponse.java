@@ -8,15 +8,17 @@ public class AuthResponse {
     private String message;
     private String accessToken;
     private Role role;
+    private Long userId;
 
     public AuthResponse() {
     }
 
-    public AuthResponse(String status, String message, String accessToken, Role role) {
+    public AuthResponse(String status, String message, String accessToken, Role role,Long userId) {
         this.status = status;
         this.message = message;
         this.accessToken = accessToken;
         this.role = role;
+        this.userId = userId;
     }
 
     public String getStatus() {
@@ -51,6 +53,14 @@ public class AuthResponse {
         this.role = role;
     }
 
+    public Long getUserId() {
+        return this.userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
     public AuthResponse status(String status) {
         setStatus(status);
         return this;
@@ -73,8 +83,7 @@ public class AuthResponse {
 
     @Override
     public boolean equals(Object o) {
-        if (o == this)
-            return true;
+        if (o == this) return true;
         if (!(o instanceof AuthResponse)) {
             return false;
         }
@@ -89,12 +98,7 @@ public class AuthResponse {
 
     @Override
     public String toString() {
-        return "{" +
-                " status='" + getStatus() + "'" +
-                ", message='" + getMessage() + "'" +
-                ", accessToken='" + getAccessToken() + "'" +
-                ", role='" + getRole() + "'" +
-                "}";
+        return "{" + " status='" + getStatus() + "'" + ", message='" + getMessage() + "'" + ", accessToken='" + getAccessToken() + "'" + ", role='" + getRole() + "'" + "}";
     }
 
 

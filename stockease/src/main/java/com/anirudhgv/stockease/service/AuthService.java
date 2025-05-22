@@ -28,7 +28,7 @@ public class AuthService {
     public AuthResponse register(User userDto) {
         Optional<User> existingUser = userRepository.findByEmail(userDto.getEmail());
         if (existingUser.isPresent()) {
-            return new AuthResponse("fail", "Email already registered", null, null);
+            return new AuthResponse("fail", "Email already registered", null, null,null);
         }
 
         System.out.println("At auth service"+userDto);
@@ -43,7 +43,7 @@ public class AuthService {
 
         String token = jwtUtil.generateToken(user.getEmail(),user.getRole());
 
-        return new AuthResponse("success", "User registered successfully", token, user.getRole());
+        return new AuthResponse("success", "User registered successfully", token, user.getRole(),user.getid());
     }
 
     public AuthResponse login(UserDto userDto) {
@@ -51,17 +51,17 @@ public class AuthService {
 
         System.out.println("at login"+userDto);
         if (userOptional.isEmpty()) {
-            return new AuthResponse("fail", "Invalid credentials", null, null);
+            return new AuthResponse("fail", "Invalid credentials", null, null,null);
         }
 
         User user = userOptional.get();
         if (!passwordEncoder.matches(userDto.getPassword(), user.getPassword())) {
-            return new AuthResponse("fail", "Invalid credentials", null, null);
+            return new AuthResponse("fail", "Invalid credentials", null, null,null);
         }
 
         String token = jwtUtil.generateToken(user.getEmail(),user.getRole());
 
-        return new AuthResponse("success", "Login successful", token, user.getRole());
+        return new AuthResponse("success", "Login successful", token, user.getRole(),user.getid());
     }
 }
 

@@ -46,6 +46,7 @@ public class LoginViewModel extends ViewModel {
                     if("success".equalsIgnoreCase(auth.getStatus())){
                         sessionManager.saveAuthToken(auth.getAccessToken());
                         sessionManager.saveUserRole(auth.getRole().toString());
+                        sessionManager.saveUserId(auth.getUserId());
                         loginSuccess.setValue(true);
                     }
                     else{

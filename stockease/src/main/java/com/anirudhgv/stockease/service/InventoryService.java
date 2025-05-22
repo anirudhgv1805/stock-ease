@@ -28,7 +28,17 @@ public class InventoryService {
     }
 
     public Inventory createInventory(Inventory inventory) {
-        return inventoryRepository.save(inventory);
+        Inventory updatedInventory = inventoryRepository.save(inventory);
+
+        InventoryLog log = new InventoryLog();
+        log.setProduct(inventory.getProduct());
+        log.setChangeAmount(0);
+        log.setNewQuantity(0);
+        log.setReason("PRODUCT CREATED");
+        log.setTimestamp(LocalDateTime.now());
+        inventoryLogRepository.save(log);
+
+        return updatedInventory;
     }
 
     public Inventory getInventoryByProductId(Long productId) {

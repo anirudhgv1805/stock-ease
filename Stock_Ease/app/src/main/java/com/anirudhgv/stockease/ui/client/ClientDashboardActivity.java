@@ -13,6 +13,9 @@ import com.anirudhgv.stockease.R;
 import com.anirudhgv.stockease.data.model.Order;
 import com.anirudhgv.stockease.data.model.OrderItem;
 import com.anirudhgv.stockease.data.model.Product;
+import com.anirudhgv.stockease.data.model.User;
+import com.anirudhgv.stockease.data.model.dto.UserDto;
+import com.anirudhgv.stockease.data.storage.SessionManager;
 import com.anirudhgv.stockease.ui.client.ProductAdapter;
 
 import java.math.BigDecimal;
@@ -26,12 +29,13 @@ public class ClientDashboardActivity extends AppCompatActivity {
     private ProductAdapter productAdapter;
     private RecyclerView recyclerView;
     private Button placeOrderButton;
-
+    SessionManager sessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_dashboard);
 
+        sessionManager = new SessionManager(getApplicationContext());
         orderViewModel = new ViewModelProvider(this).get(OrderViewModel.class);
 
         recyclerView = findViewById(R.id.product_recyclerview);
@@ -67,7 +71,12 @@ public class ClientDashboardActivity extends AppCompatActivity {
             totalAmount = totalAmount.add(priceAtOrder.multiply(BigDecimal.valueOf(quantity)));
         }
 
+        UserDto user = new UserDto();
+        if(sessionManager !=null) {
+            user.setId(sessionManager.fetchUserId());
+        }
         Order order = new Order();
+        order.setUser(user);
         order.setItems(orderItems);
         order.setTotalAmount(totalAmount);
         order.setStatus(Order.Status.PENDING);
@@ -77,7 +86,7 @@ public class ClientDashboardActivity extends AppCompatActivity {
             if (success) {
                 Toast.makeText(this, "Order placed successfully", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Failed to place order", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Order Successful", Toast.LENGTH_SHORT).show();
             }
         });
     }
