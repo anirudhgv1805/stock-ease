@@ -1,52 +1,107 @@
 package com.anirudhgv.stockease.data.model;
 
-import java.io.Serializable;
-import java.util.Date;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Order implements Serializable {
-    private Long id;
-    private String item;
-    private int quantity;
-    private String status;
-    private Date processedAt;
-    private double price;
-    private String clientName;
+import androidx.annotation.NonNull;
 
-    public Order() {}
+import com.anirudhgv.stockease.data.model.dto.UserDto;
 
-    public Order(String item, int quantity, String clientName) {
-        this.item = item;
-        this.quantity = quantity;
-        this.clientName = clientName;
-        this.status = "pending";
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
+
+public class Order implements Parcelable {
+    private Long orderId;
+    private UserDto user;
+    private LocalDateTime orderDate;
+    private Status status;
+    private BigDecimal totalAmount;
+    private List<OrderItem> items;
+
+    public Order() {
+
     }
 
-    public Order(Long id, String item, int quantity, String status, Date processedAt, double price, String clientName) {
-        this.id = id;
-        this.item = item;
-        this.quantity = quantity;
-        this.status = status;
-        this.processedAt = processedAt;
-        this.price = price;
-        this.clientName = clientName;
+    public Order(Parcel in) {
+        if (in.readByte() == 0) {
+            orderId = null;
+        } else {
+            orderId = in.readLong();
+        }
+        user = in.readParcelable(UserDto.class.getClassLoader());
+        orderDate = (LocalDateTime) in.readSerializable();
+        status = Status.values()[in.readInt()]; // Read the ordinal value of Status
+        totalAmount = (BigDecimal) in.readSerializable();
+        items = in.createTypedArrayList(OrderItem.CREATOR);
     }
 
-    public Long getId() { return id; }
-    public String getItem() { return item; }
-    public int getQuantity() { return quantity; }
-    public String getStatus() { return status; }
-    public Date getProcessedAt() { return processedAt; }
-    public double getPrice() { return price; }
-    public String getClientName() { return clientName; }
+    public static final Creator<Order> CREATOR = new Creator<Order>() {
+        @Override
+        public Order createFromParcel(Parcel in) {
+            return new Order(in);
+        }
 
-    public void setId(Long id) { this.id = id; }
-    public void setItem(String item) { this.item = item; }
-    public void setQuantity(int quantity) { this.quantity = quantity; }
-    public void setStatus(String status) { this.status = status; }
-    public void setProcessedAt(Date processedAt) { this.processedAt = processedAt; }
-    public void setPrice(double price) { this.price = price; }
-    public void setClientName(String clientName) { this.clientName = clientName; }
+        @Override
+        public Order[] newArray(int size) {
+            return new Order[size];
+        }
+    };
 
-    public Date getDateTime() { return this.processedAt;
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        if (orderId == null) {
+            dest.writeByte((byte) 0);  // Write a flag to indicate that `id` is null
+        } else {
+            dest.writeByte((byte) 1);  // Write a flag to indicate that `id` is not null
+            dest.writeLong(orderId);
+        }
+
+        dest.writeParcelable(user, flags);  // Write `user` object
+        dest.writeSerializable(orderDate);  // Write `orderDate` as `LocalDateTime`
+        dest.writeInt(status.ordinal());  // Write `status` enum as an integer (ordinal)
+        dest.writeSerializable(totalAmount);  // Write `totalAmount` as `BigDecimal`
+        dest.writeTypedList(items);  // Write list of `OrderItem` objects
+    }
+
+    public enum Status {
+        PENDING, CONFIRMED, PROCESSED, SHIPPED, DELIVERED, CANCELLED
+    }
+
+    // Getters and Setters
+    public Long getOrderId() { return orderId; }
+    public void setId(Long orderId) { this.orderId = orderId; }
+
+    public UserDto getUser() { return user; }
+    public void setUser(UserDto user) { this.user = user; }
+
+    public LocalDateTime getOrderDate() { return orderDate; }
+    public void setOrderDate(LocalDateTime orderDate) { this.orderDate = orderDate; }
+
+    public Status getStatus() { return status; }
+    public void setStatus(Status status) { this.status = status; }
+
+    public BigDecimal getTotalAmount() { return totalAmount; }
+    public void setTotalAmount(BigDecimal totalAmount) { this.totalAmount = totalAmount; }
+
+    public List<OrderItem> getItems() { return items; }
+    public void setItems(List<OrderItem> items) { this.items = items; }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + orderId +
+                ", user=" + user +
+                ", orderDate=" + orderDate +
+                ", status=" + status +
+                ", totalAmount=" + totalAmount +
+                ", items=" + items +
+                '}';
     }
 }

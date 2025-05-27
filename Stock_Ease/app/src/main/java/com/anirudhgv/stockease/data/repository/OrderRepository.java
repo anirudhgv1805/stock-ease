@@ -1,19 +1,22 @@
 package com.anirudhgv.stockease.data.repository;
 
 import android.content.Context;
-import android.os.Build;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.anirudhgv.stockease.data.model.Order;
 import com.anirudhgv.stockease.data.network.ApiClient;
 import com.anirudhgv.stockease.data.network.ApiService;
 import com.anirudhgv.stockease.data.storage.SessionManager;
 
-import java.util.List;
-
-import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 
 public class OrderRepository {
+
     private final ApiService apiService;
 
     public OrderRepository(Context context) {
@@ -21,13 +24,21 @@ public class OrderRepository {
         this.apiService = ApiClient.getApiService(sessionManager);
     }
 
-    public void getOrders(Callback<List<Order>> callback) {
-        apiService.getOrders().enqueue(callback);
-    }
+    public LiveData<Boolean> placeOrder(Order order) {
+        MutableLiveData<Boolean> result = new MutableLiveData<>();
 
-    public void createOrder(String item, int quantity, String clientName, Callback<ResponseBody> callback) {
-        Order order = new Order(item, quantity, clientName);
-        apiService.postOrder(order).enqueue(callback);
-    }
+        apiService.placeOrder(order).enqueue(new Callback<Order>() {
+            @Override
+            public void onResponse(@NonNull Call<Order> call, @NonNull Response<Order> response) {
+                result.setValue(response.isSuccessful());
+            }
 
+            @Override
+            public void onFailure(@NonNull Call<Order> call, @NonNull Throwable t) {
+                result.setValue(false);
+            }
+        });
+
+        return result;
+    }
 }

@@ -1,49 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:orientation="vertical"
-    android:padding="24dp"
-    android:background="@android:color/white">
+    android:padding="24dp">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnAddOrder"
-        android:layout_width="match_parent"
+<!--    First Card-->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/salesCard"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="➕ Add Order"
-        style="@style/Widget.Material3.Button"
-        android:layout_marginBottom="16dp" />
+        android:layout_margin="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnViewOrders"
-        android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="161dp"
+            android:layout_height="168dp"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="16dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Monthly Sale"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.142"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.117" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+<!--Second Card-->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/orderCard"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="📦 View Orders"
-        style="@style/Widget.Material3.Button"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toEndOf="@+id/salesCard"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnTransactions"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="📊 View Transactions"
-        style="@style/Widget.Material3.Button"
-        android:layout_marginBottom="24dp" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="161dp"
+            android:layout_height="168dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.914"
+            app:layout_constraintStart_toEndOf="@+id/salesCard"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnEditOrder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=" Edit Orders"
-        style="@style/Widget.Material3.Button"
-        android:layout_marginBottom="24dp" />
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Orders"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.142"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.117" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerOrders"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

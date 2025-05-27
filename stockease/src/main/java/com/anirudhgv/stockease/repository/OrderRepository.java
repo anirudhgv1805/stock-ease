@@ -8,5 +8,4 @@ import com.anirudhgv.stockease.model.Order;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-
 }
